@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Art/player.png" type="Texture" id=2]
+[ext_resource path="res://Art/playerGunExplosion01.png" type="Texture" id=3]
+[ext_resource path="res://Art/playerGunExplosion02.png" type="Texture" id=4]
+[ext_resource path="res://Sounds/ExplodingPlayerGun.wav" type="AudioStream" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.0
+} ]
+
+[node name="Player" type="RigidBody2D" index="0"]
+
+position = Vector2( 506.582, 568.823 )
+scale = Vector2( 1, 0.871724 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 3
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 1.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = true
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Linear", "Transform" ]
+SPEED = 400
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+scale = Vector2( 0.33, 0.33 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -0.130372, 5.88193 )
+scale = Vector2( 2.78577, 1.19855 )
+shape = SubResource( 1 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="2"]
+
+visible = false
+scale = Vector2( 5, 5 )
+frames = SubResource( 2 )
+animation = "default"
+frame = 1
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="ExplosionTimer" type="Timer" parent="." index="3"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="." index="4"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+max_distance = 2000.0
+attenuation = 1.0
+bus = ""
+area_mask = 1
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_ExplosionTimer_timeout"]
+
+

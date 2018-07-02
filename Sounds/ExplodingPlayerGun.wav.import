@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ExplodingPlayerGun.wav-0b1b3dd42c2f656a02657a4d07d7459b.sample"
+
+[deps]
+
+source_file="res://Sounds/ExplodingPlayerGun.wav"
+dest_files=[ "res://.import/ExplodingPlayerGun.wav-0b1b3dd42c2f656a02657a4d07d7459b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

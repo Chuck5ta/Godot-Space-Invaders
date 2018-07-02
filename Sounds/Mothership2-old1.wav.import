@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Mothership2-old1.wav-e47d87fc9ea636afbf4e3405cf496bfc.sample"
+
+[deps]
+
+source_file="res://Sounds/Mothership2-old1.wav"
+dest_files=[ "res://.import/Mothership2-old1.wav-e47d87fc9ea636afbf4e3405cf496bfc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

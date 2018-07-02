@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/ExplodingAlienShip.wav-29b3a35630777c017bb106682d4bc1cf.sample"
+
+[deps]
+
+source_file="res://Sounds/ExplodingAlienShip.wav"
+dest_files=[ "res://.import/ExplodingAlienShip.wav-29b3a35630777c017bb106682d4bc1cf.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

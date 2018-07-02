@@ -1,0 +1,116 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Invader1.gd" type="Script" id=1]
+[ext_resource path="res://Art/invader02a.png" type="Texture" id=2]
+[ext_resource path="res://Art/invader02b.png" type="Texture" id=3]
+[ext_resource path="res://Art/exlodingInvader.png" type="Texture" id=4]
+[ext_resource path="res://Sounds/ExplodingAlienShip.wav" type="AudioStream" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "animate",
+"speed": 1.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="Invader2" type="RigidBody2D" index="0"]
+
+position = Vector2( 464.571, 48.1645 )
+input_pickable = false
+collision_layer = 1
+collision_mask = 0
+mode = 3
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 1
+contact_monitor = true
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+script = ExtResource( 1 )
+_sections_unfolded = [ "Collision", "collision" ]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="0"]
+
+scale = Vector2( 5, 5 )
+frames = SubResource( 1 )
+animation = "animate"
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+
+position = Vector2( -0.187704, -0.0984306 )
+scale = Vector2( 3.01857, 2.00323 )
+shape = SubResource( 2 )
+
+[node name="Explosion" type="Sprite" parent="." index="2"]
+
+visible = false
+scale = Vector2( 5, 5 )
+texture = ExtResource( 4 )
+_sections_unfolded = [ "Animation", "Material", "Transform", "Visibility" ]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="Explosion" index="0"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+mode = 0
+mass = 1.0
+friction = 1.0
+bounce = 0.0
+gravity_scale = 0.0
+custom_integrator = false
+continuous_cd = 0
+contacts_reported = 0
+contact_monitor = false
+sleeping = false
+can_sleep = true
+linear_velocity = Vector2( 0, 0 )
+linear_damp = -1.0
+angular_velocity = 0.0
+angular_damp = -1.0
+
+[node name="ExplosionSound" type="AudioStreamPlayer" parent="." index="3"]
+
+stream = ExtResource( 5 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = ""
+
+[node name="ExplosionTimer" type="Timer" parent="." index="4"]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = false
+autostart = false
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="5"]
+
+rect = Rect2( -10, -10, 20, 20 )
+
+[connection signal="body_entered" from="." to="." method="_on_Invader1_body_entered"]
+
+[connection signal="timeout" from="ExplosionTimer" to="." method="_on_ExplosionTimer_timeout"]
+
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+
+
