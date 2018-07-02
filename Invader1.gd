@@ -23,7 +23,7 @@ func _process(delta):
         pass
     #move the Invader
     if (MovementDown):
-        position.y += DistanceToMoveDown        
+        position.y += DistanceToMoveDown      
         MovementDown = false 
     elif (MovementRight):
         position.x += SPEED

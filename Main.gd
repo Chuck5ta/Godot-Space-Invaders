@@ -27,7 +27,9 @@ func _ready():
     # Called when the node is added to the scene for the first time.
     randomize()
     # Initialization here
-    _initialise()     
+    _initialise()   
+    $InvaderSoundTimer.start() 
+    $InvaderSoundSpeed.start() 
 
 func _new_game():
     $HUD.show_message("Get Ready", 0)
@@ -62,7 +64,9 @@ func _process(delta):
                 var NoOfLaserToFire = randi() % 2
                 # while (TotalInvaderLaserbolts != NoOfLaserToFire):
                 _invaders_fire_laserbolts(NoOfLaserToFire+1) # fire 1 or 2 lasers
-    else:
+    else:           
+        $InvaderSoundTimer.stop() 
+        $InvaderSoundSpeed.stop() 
         $HUD.show_game_over(TotalScore)
         # clear remaining invaders
         if (TotalInvaders > 0):
@@ -676,7 +680,21 @@ func _on_Player_hit():
     GameOver = true
     
     
-    
-    
-    
 
+func _wait(WaitTime):
+    var t = Timer.new()
+    t.set_wait_time(WaitTime)
+    t.set_one_shot(true)
+    self.add_child(t)
+    t.start()
+    yield(t, "timeout")
+
+func _on_InvaderSoundTimer_timeout():
+    $InvaderMovementSound1.play()
+    $InvaderMovementSound2.play()
+    $InvaderMovementSound3.play()
+    $InvaderMovementSound4.play()
+
+
+func _on_InvaderSoundSpeed_timeout():
+    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 2

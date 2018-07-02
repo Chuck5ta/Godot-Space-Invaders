@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://LaserBolt.tscn" type="PackedScene" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://Mothership.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Font/Xolonium-Regular.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sounds/fastinvader4.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/fastinvader3.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/fastinvader2.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sounds/fastinvader1.wav" type="AudioStream" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -385,6 +389,56 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="HUD" parent="." index="63" instance=ExtResource( 12 )]
 
+[node name="InvaderMovementSound1" type="AudioStreamPlayer" parent="." index="64"]
+
+stream = ExtResource( 13 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = ""
+
+[node name="InvaderMovementSound2" type="AudioStreamPlayer" parent="." index="65"]
+
+stream = ExtResource( 14 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = ""
+
+[node name="InvaderMovementSound3" type="AudioStreamPlayer" parent="." index="66"]
+
+stream = ExtResource( 15 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = ""
+
+[node name="InvaderMovementSound4" type="AudioStreamPlayer" parent="." index="67"]
+
+stream = ExtResource( 16 )
+volume_db = 0.0
+pitch_scale = 1.0
+autoplay = false
+mix_target = 0
+bus = ""
+
+[node name="InvaderSoundTimer" type="Timer" parent="." index="68"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="InvaderSoundSpeed" type="Timer" parent="." index="69"]
+
+process_mode = 1
+wait_time = 8.0
+one_shot = false
+autostart = false
+
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
 [connection signal="enteringEarth" from="Invader40" to="." method="_on_Invader_entering_earth"]
@@ -616,5 +670,9 @@ _sections_unfolded = [ "custom_fonts" ]
 [connection signal="hit" from="Mothership" to="." method="_on_Mothership_hit"]
 
 [connection signal="start_game" from="HUD" to="." method="_new_game"]
+
+[connection signal="timeout" from="InvaderSoundTimer" to="." method="_on_InvaderSoundTimer_timeout"]
+
+[connection signal="timeout" from="InvaderSoundSpeed" to="." method="_on_InvaderSoundSpeed_timeout"]
 
 
