@@ -12,7 +12,7 @@ Language: GDScript
 
 I was introduced to Godot via Gamedev.tv, while I was doing UE4 and Blender courses with them. They recently had a Kickstarter, as they will be creating Godot game development courses. I backed that and have jumped straight into messing about with game creation with the engine, and I am loving it so far :D
 
-##THE GAME
+## THE GAME
 
 Destroy the invading aliens before they break through to the Earth
 
