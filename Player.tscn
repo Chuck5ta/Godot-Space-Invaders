@@ -44,7 +44,7 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Linear", "Transform" ]
-SPEED = 400
+SPEED = 600
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

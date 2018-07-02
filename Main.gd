@@ -697,4 +697,4 @@ func _on_InvaderSoundTimer_timeout():
 
 
 func _on_InvaderSoundSpeed_timeout():
-    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 2
+    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 1.5

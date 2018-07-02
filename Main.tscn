@@ -435,7 +435,7 @@ autostart = false
 [node name="InvaderSoundSpeed" type="Timer" parent="." index="69"]
 
 process_mode = 1
-wait_time = 8.0
+wait_time = 10.0
 one_shot = false
 autostart = false
 

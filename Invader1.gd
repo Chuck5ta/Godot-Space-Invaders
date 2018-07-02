@@ -7,7 +7,7 @@ var MovementRight = true #Invader will move right when initially spawned
 var MovementDown = false
 var MaxDistanceToTravel = 80 # max distance to move left and right
 var DistanceTravelled = 0 # Distance travelled so far in pixels
-var DistanceToMoveDown = 30 #move 50 pixels down the screen
+var DistanceToMoveDown = 25 #move 50 pixels down the screen
 var Attack = false # to prevent movement before the game starts 
 var AnimationSpeed = 1
 
@@ -37,8 +37,8 @@ func _process(delta):
         DistanceTravelled = 0
         MovementRight = !MovementRight
         #increase movement speed
-        SPEED += 0.1
-        AnimationSpeed += 1
+        SPEED += 0.01
+        AnimationSpeed += SPEED
         $AnimatedSprite.frames.set_animation_speed("animate", AnimationSpeed)
     
 func _on_Invader1_body_entered(body):
