@@ -9,7 +9,7 @@ For a game or 2, I will recreate the classics, starting with Space Invaders (197
 - Game Engine: Godot https://godotengine.org/
 - Language: GDScript
 
-I was introduced to Godot via Gamedev.tv, while I was doing UE4 and Blender courses with them. They recently had a Kickstarter, as they will be creating Godot game development courses. I backed that and have jumped straight into messing about with game creation with the engine, and I am loving it so far :D
+I was introduced to Godot via Gamedev.tv, while I was doing UE4 and Blender courses with them. They recently had a Kickstarter, as they will be creating Godot game development courses. I backed that Kickstarter and have jumped straight into messing about with game creation using the engine, and I am loving it so far :D
 
 ## THE GAME
 
@@ -20,6 +20,6 @@ Destroy the invading aliens before they break through to the Earth
 - Right arrow: move right
 - Spacebar: Fire laserbolt
 
-Join me and other game devewlopers in the making at Gamedev.tv
+Join me and other game developers in the making at Gamedev.tv
 - https://community.gamedev.tv/
 
