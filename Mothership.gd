@@ -64,3 +64,10 @@ func _on_Mothership_body_entered(body):
 func _on_ExplsionTimer_timeout():
     $ExplosionSprite.visible = false
     
+func disable_mothership():
+    $CollisionShape2D.disabled = true
+    MothershipAlive = false
+    $MothershipSprite.visible = false 
+    $AppearTimer.stop()
+
+    

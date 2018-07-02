@@ -19,6 +19,7 @@ var Invader1Score = 10
 var Invader2Score = 20
 var Invader3Score = 30
 var MothershipScore = 100
+var MothershipAlive = true
 # Game Over
 var GameOver = false
 
@@ -36,11 +37,13 @@ func _new_game():
     get_tree().reload_current_scene() 
     
 func _game_over():
-    if (TotalInvaders == 0):
+    if (TotalInvaders == 0 && !MothershipAlive):
         print ("Total Invaders = 0!!!!")
         GameOver = true
         return true
     if (GameOver == true): # set when the player is killed or the aliens break through
+        if (MothershipAlive):
+            $Mothership.disable_mothership() # we no longer want to see the Mothership
         return true
                
 
@@ -231,6 +234,7 @@ func _on_InvaderLaserBolt2_hiding():
     TotalInvaderLaserbolts -= 1    
 
 func _on_Mothership_hit():
+    MothershipAlive = false
     _update_total_score(MothershipScore)    
 
 func _invader_killed(Row, Column, InvaderScore):
