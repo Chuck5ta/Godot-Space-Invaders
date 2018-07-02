@@ -16,6 +16,7 @@ I was introduced to Godot via Gamedev.tv, while I was doing UE4 and Blender cour
 
 Destroy the invading aliens before they break through to the Earth
 
-Left arrow: move left
-Right arrow: move right
-Spacebar: Fire laserbolt
+##### KEYS
+- Left arrow: move left
+- Right arrow: move right
+- Spacebar: Fire laserbolt
