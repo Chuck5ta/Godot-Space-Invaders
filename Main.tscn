@@ -1,12 +1,12 @@
 [gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://LaserBolt.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=4]
-[ext_resource path="res://Invader1.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Invader2.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Invader3.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Sounds/shoot.wav" type="AudioStream" id=3]
+[ext_resource path="res://Invader1.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Invader2.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Invader3.tscn" type="PackedScene" id=6]
+[ext_resource path="res://LaserBolt.tscn" type="PackedScene" id=7]
 [ext_resource path="res://InvaderLaserBolt.tscn" type="PackedScene" id=8]
 [ext_resource path="res://InvaderLaserBolt2.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Mothership.tscn" type="PackedScene" id=10]
@@ -29,17 +29,15 @@ _sections_unfolded = [ "Font", "Settings" ]
 [node name="Main" type="Node" index="0"]
 
 script = ExtResource( 1 )
-LaserBolt = ExtResource( 2 )
-InvaderLaserBolt01 = null
 
-[node name="Player" parent="." index="0" instance=ExtResource( 3 )]
+[node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
 position = Vector2( 491.582, 704.823 )
 contacts_reported = 5
 
 [node name="LaserBoltSound" type="AudioStreamPlayer" parent="." index="1"]
 
-stream = ExtResource( 4 )
+stream = ExtResource( 3 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
@@ -47,281 +45,281 @@ mix_target = 0
 bus = ""
 _sections_unfolded = [ "Pause" ]
 
-[node name="Invader40" parent="." index="2" instance=ExtResource( 5 )]
+[node name="Invader40" parent="." index="2" instance=ExtResource( 4 )]
 
 position = Vector2( 109.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader30" parent="." index="3" instance=ExtResource( 5 )]
+[node name="Invader30" parent="." index="3" instance=ExtResource( 4 )]
 
 position = Vector2( 109.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader41" parent="." index="4" instance=ExtResource( 5 )]
+[node name="Invader41" parent="." index="4" instance=ExtResource( 4 )]
 
 position = Vector2( 189.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader31" parent="." index="5" instance=ExtResource( 5 )]
+[node name="Invader31" parent="." index="5" instance=ExtResource( 4 )]
 
 position = Vector2( 189.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader42" parent="." index="6" instance=ExtResource( 5 )]
+[node name="Invader42" parent="." index="6" instance=ExtResource( 4 )]
 
 position = Vector2( 269.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader32" parent="." index="7" instance=ExtResource( 5 )]
+[node name="Invader32" parent="." index="7" instance=ExtResource( 4 )]
 
 position = Vector2( 269.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader43" parent="." index="8" instance=ExtResource( 5 )]
+[node name="Invader43" parent="." index="8" instance=ExtResource( 4 )]
 
 position = Vector2( 349.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader33" parent="." index="9" instance=ExtResource( 5 )]
+[node name="Invader33" parent="." index="9" instance=ExtResource( 4 )]
 
 position = Vector2( 349.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader44" parent="." index="10" instance=ExtResource( 5 )]
+[node name="Invader44" parent="." index="10" instance=ExtResource( 4 )]
 
 position = Vector2( 429.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader34" parent="." index="11" instance=ExtResource( 5 )]
+[node name="Invader34" parent="." index="11" instance=ExtResource( 4 )]
 
 position = Vector2( 429.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader45" parent="." index="12" instance=ExtResource( 5 )]
+[node name="Invader45" parent="." index="12" instance=ExtResource( 4 )]
 
 position = Vector2( 509.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader35" parent="." index="13" instance=ExtResource( 5 )]
+[node name="Invader35" parent="." index="13" instance=ExtResource( 4 )]
 
 position = Vector2( 509.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader46" parent="." index="14" instance=ExtResource( 5 )]
+[node name="Invader46" parent="." index="14" instance=ExtResource( 4 )]
 
 position = Vector2( 589.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader36" parent="." index="15" instance=ExtResource( 5 )]
+[node name="Invader36" parent="." index="15" instance=ExtResource( 4 )]
 
 position = Vector2( 589.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader47" parent="." index="16" instance=ExtResource( 5 )]
+[node name="Invader47" parent="." index="16" instance=ExtResource( 4 )]
 
 position = Vector2( 669.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader37" parent="." index="17" instance=ExtResource( 5 )]
+[node name="Invader37" parent="." index="17" instance=ExtResource( 4 )]
 
 position = Vector2( 669.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader48" parent="." index="18" instance=ExtResource( 5 )]
+[node name="Invader48" parent="." index="18" instance=ExtResource( 4 )]
 
 position = Vector2( 749.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader38" parent="." index="19" instance=ExtResource( 5 )]
+[node name="Invader38" parent="." index="19" instance=ExtResource( 4 )]
 
 position = Vector2( 749.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader49" parent="." index="20" instance=ExtResource( 5 )]
+[node name="Invader49" parent="." index="20" instance=ExtResource( 4 )]
 
 position = Vector2( 829.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader39" parent="." index="21" instance=ExtResource( 5 )]
+[node name="Invader39" parent="." index="21" instance=ExtResource( 4 )]
 
 position = Vector2( 829.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader410" parent="." index="22" instance=ExtResource( 5 )]
+[node name="Invader410" parent="." index="22" instance=ExtResource( 4 )]
 
 position = Vector2( 909.743, 367.602 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader310" parent="." index="23" instance=ExtResource( 5 )]
+[node name="Invader310" parent="." index="23" instance=ExtResource( 4 )]
 
 position = Vector2( 909.743, 311.126 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader20" parent="." index="24" instance=ExtResource( 6 )]
+[node name="Invader20" parent="." index="24" instance=ExtResource( 5 )]
 
 position = Vector2( 110.844, 256.225 )
 
-[node name="Invader21" parent="." index="25" instance=ExtResource( 6 )]
+[node name="Invader21" parent="." index="25" instance=ExtResource( 5 )]
 
 position = Vector2( 190.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader22" parent="." index="26" instance=ExtResource( 6 )]
+[node name="Invader22" parent="." index="26" instance=ExtResource( 5 )]
 
 position = Vector2( 270.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader23" parent="." index="27" instance=ExtResource( 6 )]
+[node name="Invader23" parent="." index="27" instance=ExtResource( 5 )]
 
 position = Vector2( 350.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader24" parent="." index="28" instance=ExtResource( 6 )]
+[node name="Invader24" parent="." index="28" instance=ExtResource( 5 )]
 
 position = Vector2( 430.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader25" parent="." index="29" instance=ExtResource( 6 )]
+[node name="Invader25" parent="." index="29" instance=ExtResource( 5 )]
 
 position = Vector2( 510.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader26" parent="." index="30" instance=ExtResource( 6 )]
+[node name="Invader26" parent="." index="30" instance=ExtResource( 5 )]
 
 position = Vector2( 590.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader27" parent="." index="31" instance=ExtResource( 6 )]
+[node name="Invader27" parent="." index="31" instance=ExtResource( 5 )]
 
 position = Vector2( 670.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader28" parent="." index="32" instance=ExtResource( 6 )]
+[node name="Invader28" parent="." index="32" instance=ExtResource( 5 )]
 
 position = Vector2( 750.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader29" parent="." index="33" instance=ExtResource( 6 )]
+[node name="Invader29" parent="." index="33" instance=ExtResource( 5 )]
 
 position = Vector2( 830.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader210" parent="." index="34" instance=ExtResource( 6 )]
+[node name="Invader210" parent="." index="34" instance=ExtResource( 5 )]
 
 position = Vector2( 910.04, 256.225 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader10" parent="." index="35" instance=ExtResource( 6 )]
+[node name="Invader10" parent="." index="35" instance=ExtResource( 5 )]
 
 position = Vector2( 110.486, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader11" parent="." index="36" instance=ExtResource( 6 )]
+[node name="Invader11" parent="." index="36" instance=ExtResource( 5 )]
 
 position = Vector2( 190.04, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader12" parent="." index="37" instance=ExtResource( 6 )]
+[node name="Invader12" parent="." index="37" instance=ExtResource( 5 )]
 
 position = Vector2( 270.04, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader13" parent="." index="38" instance=ExtResource( 6 )]
+[node name="Invader13" parent="." index="38" instance=ExtResource( 5 )]
 
 position = Vector2( 350.04, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader14" parent="." index="39" instance=ExtResource( 6 )]
+[node name="Invader14" parent="." index="39" instance=ExtResource( 5 )]
 
 position = Vector2( 430.04, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader15" parent="." index="40" instance=ExtResource( 6 )]
+[node name="Invader15" parent="." index="40" instance=ExtResource( 5 )]
 
 position = Vector2( 509.137, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader16" parent="." index="41" instance=ExtResource( 6 )]
+[node name="Invader16" parent="." index="41" instance=ExtResource( 5 )]
 
 position = Vector2( 589.137, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader17" parent="." index="42" instance=ExtResource( 6 )]
+[node name="Invader17" parent="." index="42" instance=ExtResource( 5 )]
 
 position = Vector2( 669.137, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader18" parent="." index="43" instance=ExtResource( 6 )]
+[node name="Invader18" parent="." index="43" instance=ExtResource( 5 )]
 
 position = Vector2( 749.137, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader19" parent="." index="44" instance=ExtResource( 6 )]
+[node name="Invader19" parent="." index="44" instance=ExtResource( 5 )]
 
 position = Vector2( 829.137, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader110" parent="." index="45" instance=ExtResource( 6 )]
+[node name="Invader110" parent="." index="45" instance=ExtResource( 5 )]
 
 position = Vector2( 909.137, 203.226 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader00" parent="." index="46" instance=ExtResource( 7 )]
+[node name="Invader00" parent="." index="46" instance=ExtResource( 6 )]
 
 position = Vector2( 110.477, 150.189 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader01" parent="." index="47" instance=ExtResource( 7 )]
+[node name="Invader01" parent="." index="47" instance=ExtResource( 6 )]
 
 position = Vector2( 190.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader02" parent="." index="48" instance=ExtResource( 7 )]
+[node name="Invader02" parent="." index="48" instance=ExtResource( 6 )]
 
 position = Vector2( 270.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader03" parent="." index="49" instance=ExtResource( 7 )]
+[node name="Invader03" parent="." index="49" instance=ExtResource( 6 )]
 
 position = Vector2( 350.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader04" parent="." index="50" instance=ExtResource( 7 )]
+[node name="Invader04" parent="." index="50" instance=ExtResource( 6 )]
 
 position = Vector2( 430.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader05" parent="." index="51" instance=ExtResource( 7 )]
+[node name="Invader05" parent="." index="51" instance=ExtResource( 6 )]
 
 position = Vector2( 510.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader06" parent="." index="52" instance=ExtResource( 7 )]
+[node name="Invader06" parent="." index="52" instance=ExtResource( 6 )]
 
 position = Vector2( 590.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader07" parent="." index="53" instance=ExtResource( 7 )]
+[node name="Invader07" parent="." index="53" instance=ExtResource( 6 )]
 
 position = Vector2( 670.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader08" parent="." index="54" instance=ExtResource( 7 )]
+[node name="Invader08" parent="." index="54" instance=ExtResource( 6 )]
 
 position = Vector2( 750.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader09" parent="." index="55" instance=ExtResource( 7 )]
+[node name="Invader09" parent="." index="55" instance=ExtResource( 6 )]
 
 position = Vector2( 830.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="Invader010" parent="." index="56" instance=ExtResource( 7 )]
+[node name="Invader010" parent="." index="56" instance=ExtResource( 6 )]
 
 position = Vector2( 910.477, 150.933 )
 _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
-[node name="LaserBolt" parent="." index="57" instance=ExtResource( 2 )]
+[node name="LaserBolt" parent="." index="57" instance=ExtResource( 7 )]
 
 gravity_scale = 0.0
 _sections_unfolded = [ "Collision", "Transform" ]

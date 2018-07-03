@@ -18,7 +18,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[node name="InvaderLaserBolt" type="RigidBody2D"]
+[node name="InvaderLaserBolt" type="RigidBody2D" index="0"]
 
 position = Vector2( 518.321, 80.1924 )
 scale = Vector2( 4, 4 )
@@ -46,8 +46,8 @@ SPEED = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( 0.533153, 0.448725 )
-scale = Vector2( 0.148882, 0.36157 )
+position = Vector2( 0.541963, 0.441837 )
+scale = Vector2( 0.14956, 0.36104 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="1"]
@@ -60,7 +60,6 @@ rect = Rect2( -10, -10, 20, 20 )
 
 frames = SubResource( 2 )
 animation = "laserBolt"
-frame = 1
 playing = true
 
 [connection signal="body_entered" from="." to="." method="_on_LaserBolt_body_entered"]

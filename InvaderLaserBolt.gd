@@ -31,8 +31,9 @@ func _on_VisibilityNotifier2D_screen_exited():
 func _on_InvaderLaserBolt_body_entered(body):
     # delete the laser bolt
     print("Laser bolt has hit the target!")
-    print(body) 
     _disable_laserbolt()
     
-func EnableCollision():
+func _reset_laserbolt():
+    show()
+    LaserBoltMoving = true
     $CollisionShape2D.disabled = false 

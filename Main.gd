@@ -1,8 +1,5 @@
 extends Node
 
-export (PackedScene) var LaserBolt
-export (PackedScene) var InvaderLaserBolt01
-#export (PackedScene) var LaserBolt
 # Player related
 var PlayerAlive = true
 var LaserBoltExists = false
@@ -11,17 +8,17 @@ var TotalPlayerLives = 3
 var TotalRows = 5
 var TotalInvadersPerRow = 11
 var TotalInvaders = 55
-var InvaderAliveStateMatrix = [] # stored row by column
 var TotalInvaderLaserbolts = 0
 var MaxInvaderLaserbolts = 2 # no more than 2 bolts can exist at any one time
+var InvaderAliveStateMatrix = [] # stored row by column
+var MothershipAlive = true
 # SCORING
 var TotalScore = 0
 var Invader1Score = 10
 var Invader2Score = 20
 var Invader3Score = 30
 var MothershipScore = 100
-var MothershipAlive = true
-# Game Over
+# Game Over - Wave Killed
 var GameOver = false
 var WaveKilled = false
 
@@ -93,8 +90,7 @@ func _process(delta):
                 $LaserBolt.position= $Player.position
                 $LaserBolt.position.y -= 22 # position it just above the gun tip
                 $LaserBolt.show()
-                $LaserBolt.LaserBoltMoving = true
-                $LaserBolt.EnableCollision()
+                $LaserBolt._reset_laserbolt()
                 $LaserBoltSound.play()
             
         # INVADERS FIRING LASER (only 2 lasers allowed to exist)
@@ -357,20 +353,13 @@ func _invader_fire_laser(Invader):
     print("**** FIRE *****")
     if (TotalInvaderLaserbolts == 0):
         $InvaderLaserBolt1.position = Invader.position
-        $InvaderLaserBolt1.position.y += 28 # position it just above the gun tip
-        $InvaderLaserBolt1.show()        
-        $InvaderLaserBolt1.LaserBoltMoving = true
-        $InvaderLaserBolt1.EnableCollision()
+        $InvaderLaserBolt1.position.y += 28 # position it just above the gun tip  
+        $InvaderLaserBolt1._reset_laserbolt()
     else:
         $InvaderLaserBolt2.position = Invader.position
         $InvaderLaserBolt2.position.y += 28 # position it just above the gun tip
-        $InvaderLaserBolt2.show()
-        $InvaderLaserBolt2.LaserBoltMoving = true
-        $InvaderLaserBolt2.EnableCollision()
+        $InvaderLaserBolt2._reset_laserbolt()
     TotalInvaderLaserbolts += 1
-    #$InvaderLaserBolt01.LaserBoltMoving = true
-    #$InvaderLaserBolt01.EnableCollision()
-    # $LaserBoltSound.play()
 
 func _get_invader(row, column):
     if (row == 0):
@@ -784,7 +773,8 @@ func _on_Invader410_hit():
 # PLAYER RELATED
 # ===============
 
-func _on_LaserBolt_hiding():
+# this allows for a new bolt to be fired
+func _on_LaserBolt_hiding(): 
     LaserBoltExists = false  
 
 func _on_Player_hit():

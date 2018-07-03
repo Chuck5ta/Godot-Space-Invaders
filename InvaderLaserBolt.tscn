@@ -60,7 +60,6 @@ rect = Rect2( -10, -10, 20, 20 )
 
 frames = SubResource( 2 )
 animation = "laserBolt"
-frame = 1
 playing = true
 
 [connection signal="body_entered" from="." to="." method="_on_LaserBolt_body_entered"]

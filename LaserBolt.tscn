@@ -8,7 +8,7 @@
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="LaserBolt" type="RigidBody2D"]
+[node name="LaserBolt" type="RigidBody2D" index="0"]
 
 position = Vector2( -33.5185, 2.34906 )
 input_pickable = false
@@ -41,8 +41,8 @@ _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-position = Vector2( -0.0142745, 0.0212226 )
-scale = Vector2( 0.255683, 0.62044 )
+position = Vector2( -0.0421335, -0.0444553 )
+scale = Vector2( 0.25354, 0.615388 )
 shape = SubResource( 1 )
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="2"]
