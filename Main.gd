@@ -50,6 +50,14 @@ func _new_game():
         $Mothership._reset_mothership_scene()
         $Player._reset_player_scene()
         _reset_invaders()
+        $InvaderSoundTimer.wait_time = 1
+        $InvaderSoundSpeed.wait_time = 10
+        $InvaderSoundTimer.start() 
+        $InvaderSoundSpeed.start() 
+        $InvaderMovementSound1.play()   
+        $InvaderMovementSound2.play()   
+        $InvaderMovementSound3.play()   
+        $InvaderMovementSound4.play()  
    
 
 func _wave_killed():
@@ -69,6 +77,12 @@ func _game_over():
 
 func _process(delta):
     if (_wave_killed()):
+        $InvaderMovementSound1.stop()   
+        $InvaderMovementSound2.stop()   
+        $InvaderMovementSound3.stop()   
+        $InvaderMovementSound4.stop()  
+        $InvaderSoundTimer.stop() 
+        $InvaderSoundSpeed.stop() 
         $HUD.show_next_wave(TotalScore)
         return
     if (!_game_over()):
@@ -93,6 +107,10 @@ func _process(delta):
     else:           
         $InvaderSoundTimer.stop() 
         $InvaderSoundSpeed.stop() 
+        $InvaderMovementSound1.stop()   
+        $InvaderMovementSound2.stop()   
+        $InvaderMovementSound3.stop()   
+        $InvaderMovementSound4.stop()        
         $HUD.show_game_over(TotalScore)
         # clear remaining invaders
         if (TotalInvaders > 0):

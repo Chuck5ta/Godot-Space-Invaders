@@ -7,7 +7,7 @@ var MovementRight = true #Invader will move right when initially spawned
 var MovementDown = false
 var MaxDistanceToTravel = 80 # max distance to move left and right
 var DistanceTravelled = 0 # Distance travelled so far in pixels
-var DistanceToMoveDown = 5 #25 #move 50 pixels down the screen
+var DistanceToMoveDown = 10 #25 #move 50 pixels down the screen
 var Attack = false # to prevent movement before the game starts 
 var AnimationSpeed = 1
 # Used for resetting the invader
@@ -91,3 +91,6 @@ func _reset_invader_scene():
     $AnimatedSprite.play()
     $CollisionShape2D.disabled = false
     Attack = true
+    AnimationSpeed = 1
+    DistanceToMoveDown += 1 # increses every wave
+    
