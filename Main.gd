@@ -6,6 +6,7 @@ export (PackedScene) var InvaderLaserBolt01
 # Player related
 var PlayerAlive = true
 var LaserBoltExists = false
+var TotalPlayerLives = 3
 # Invader related 
 var TotalRows = 5
 var TotalInvadersPerRow = 11
@@ -22,6 +23,7 @@ var MothershipScore = 100
 var MothershipAlive = true
 # Game Over
 var GameOver = false
+var WaveKilled = false
 
 
 func _ready():
@@ -33,27 +35,34 @@ func _ready():
     $InvaderSoundSpeed.start() 
 
 func _new_game():
-    GameOver = false
-    PlayerAlive = true
-    $HUD.show_message("Get Ready", 0)
-    #get_tree().reload_current_scene() 
-    _initialise()   
-    # Put Invaders back
-    TotalInvaders = 55
-    _reset_invaders()
+    if (GameOver):  # Player dead or invaders have broken through      
+        get_tree().reload_current_scene() 
+    else: # continue to next wave
+        print("***** NEW WAVE ******")
+        GameOver = false
+        WaveKilled = false
+        PlayerAlive = true
+        $HUD.show_message("Get Ready", TotalScore)
+        #_initialise()   
+        # Put Invaders back
+        TotalInvaders = 55
+        MothershipAlive = true
+        _reset_invaders()
     
 func _game_over():
     if (TotalInvaders == 0 && !MothershipAlive):
-        print ("Total Invaders = 0!!!!")
-        GameOver = true
-        return true
+        WaveKilled = true
+        return false
     if (GameOver == true): # set when the player is killed or the aliens break through
         if (MothershipAlive):
             $Mothership.disable_mothership() # we no longer want to see the Mothership
         return true
+    return false
                
 
 func _process(delta):
+    if (WaveKilled):
+        _new_game()
     if (!_game_over()):
         # fire LaserBolt when spacebar pressed
         if (PlayerAlive):
