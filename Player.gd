@@ -35,6 +35,7 @@ func _process(delta):
 
 func _on_Player_body_entered(body):
     print("Player has been hit!!")
+    $CollisionShape2D.disabled = true
     PlayerAlive = false
     # hide animation  
     $Sprite.visible = false 
@@ -42,7 +43,7 @@ func _on_Player_body_entered(body):
     $AnimatedSprite.play()  
     $ExplosionSound.play()
     $ExplosionTimer.start()
-    $CollisionShape2D.disabled = true
+    yield($ExplosionTimer, "timeout")
     emit_signal("hit")
 
 
@@ -53,7 +54,6 @@ func _on_ExplosionTimer_timeout():
     $AnimatedSprite.visible = false
     $Sprite.visible = true  
     $ExplosionTimer.stop() 
-    #queue_free()
     
     
 # Run at the start of a new level

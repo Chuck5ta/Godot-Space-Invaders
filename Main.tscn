@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://LaserBolt.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Sounds/fastinvader3.wav" type="AudioStream" id=14]
 [ext_resource path="res://Sounds/fastinvader2.wav" type="AudioStream" id=15]
 [ext_resource path="res://Sounds/fastinvader1.wav" type="AudioStream" id=16]
+[ext_resource path="res://Art/player.png" type="Texture" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -438,6 +439,20 @@ process_mode = 1
 wait_time = 10.0
 one_shot = false
 autostart = false
+
+[node name="PlayerLife" type="Sprite" parent="." index="70"]
+
+position = Vector2( 35.6044, 742.781 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 17 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="PlayerLife2" type="Sprite" parent="." index="71"]
+
+position = Vector2( 77.6044, 742.781 )
+scale = Vector2( 0.2, 0.2 )
+texture = ExtResource( 17 )
+_sections_unfolded = [ "Transform" ]
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 

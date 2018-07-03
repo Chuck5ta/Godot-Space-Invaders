@@ -769,11 +769,18 @@ func _on_LaserBolt_hiding():
     LaserBoltExists = false  
 
 func _on_Player_hit():
-    print("Player killed!!!")
-    PlayerAlive = false
-    # Game Over
-    GameOver = true
-    
+    TotalPlayerLives -= 1
+    if (TotalPlayerLives == 2):
+        # remove 2nd player life image (bottom left of screen)
+        $PlayerLife2.hide()
+    elif (TotalPlayerLives == 1):
+        $PlayerLife.hide()
+    if (TotalPlayerLives == 0):
+        PlayerAlive = false
+        # Game Over
+        GameOver = true
+    else: # reset player
+        $Player._reset_player_scene()
     
 
 func _wait(WaitTime):
