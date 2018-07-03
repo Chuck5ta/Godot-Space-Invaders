@@ -454,6 +454,13 @@ scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 17 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="Timer" type="Timer" parent="." index="72"]
+
+process_mode = 1
+wait_time = 20.0
+one_shot = false
+autostart = false
+
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
 [connection signal="enteringEarth" from="Invader40" to="." method="_on_Invader_entering_earth"]
@@ -689,5 +696,7 @@ _sections_unfolded = [ "Transform" ]
 [connection signal="timeout" from="InvaderSoundTimer" to="." method="_on_InvaderSoundTimer_timeout"]
 
 [connection signal="timeout" from="InvaderSoundSpeed" to="." method="_on_InvaderSoundSpeed_timeout"]
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 
 

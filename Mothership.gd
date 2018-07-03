@@ -4,16 +4,16 @@ signal hit
 var Flying = false
 var FlyDirection = 5 # move right
 var MothershipAlive = true
-# class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+# Used for resetting the mothership
+var StartPositionX = 0;
+var StartPositionY = 0;
 
-func _ready():    
+func _ready():  
+    # store position
+    StartPositionX = position.x
+    StartPositionY = position.y  
     randomize()
-    #hide()
     $AppearTimer.start()
-    #position.x = 100
-    #position.y = 100
 
 func _process(delta):
     if (MothershipAlive && Flying):
@@ -69,5 +69,19 @@ func disable_mothership():
     MothershipAlive = false
     $MothershipSprite.visible = false 
     $AppearTimer.stop()
+    
+    
+# Run at the start of a new level
+func _reset_mothership_scene():
+    show()  
+    $MothershipSprite.show()
+    $MothershipSprite.visible = true 
+    position.x = StartPositionX
+    position.y = StartPositionY
+    MothershipAlive = true
+    Flying = true
+    FlyDirection = 5 # move right
+    $CollisionShape2D.disabled = false
+    $AppearTimer.start()
 
     

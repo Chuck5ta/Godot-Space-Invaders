@@ -39,20 +39,22 @@ func _new_game():
         $HUD.show_message("Get Ready", TotalScore)     
         get_tree().reload_current_scene() 
     else: # continue to next wave
+        $Timer.start()
         print("***** NEW WAVE ******")
-        GameOver = false
         WaveKilled = false
         PlayerAlive = true
         $HUD.show_message("Get Ready", TotalScore)
-        #_initialise()   
         # Put Invaders back
         TotalInvaders = 55
         MothershipAlive = true
+        $Mothership._reset_mothership_scene()
+        $Player._reset_player_scene()
         _reset_invaders()
    
 
 func _wave_killed():
     if (TotalInvaders == 0 && !MothershipAlive):
+        print("----==== WAVE KILLED ====----")
         WaveKilled = true
         return true
     return false
@@ -109,7 +111,6 @@ func _initialise():
     #GameOver = false 
 
 func _reset_invaders():
-    $Player._reset_player_scene()
     # set all invaders to alive
     for Row in range(TotalRows):
         for Column in range(TotalInvadersPerRow):
@@ -800,3 +801,8 @@ func _on_InvaderSoundTimer_timeout():
 
 func _on_InvaderSoundSpeed_timeout():
     $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 1.5
+
+
+func _on_Timer_timeout():
+    print("TOTAL INVADERS: ",TotalInvaders)
+    print("MOTHERSHIP ALIVE STATE: ", MothershipAlive)
