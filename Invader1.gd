@@ -7,7 +7,7 @@ var MovementRight = true #Invader will move right when initially spawned
 var MovementDown = false
 var MaxDistanceToTravel = 80 # max distance to move left and right
 var DistanceTravelled = 0 # Distance travelled so far in pixels
-var DistanceToMoveDown = 25 #move 50 pixels down the screen
+var DistanceToMoveDown = 5 #25 #move 50 pixels down the screen
 var Attack = false # to prevent movement before the game starts 
 var AnimationSpeed = 1
 # Used for resetting the invader

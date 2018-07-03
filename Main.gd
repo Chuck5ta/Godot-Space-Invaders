@@ -35,7 +35,8 @@ func _ready():
     $InvaderSoundSpeed.start() 
 
 func _new_game():
-    if (GameOver):  # Player dead or invaders have broken through      
+    if (GameOver):  # Player dead or invaders have broken through 
+        $HUD.show_message("Get Ready", TotalScore)     
         get_tree().reload_current_scene() 
     else: # continue to next wave
         print("***** NEW WAVE ******")
@@ -48,11 +49,15 @@ func _new_game():
         TotalInvaders = 55
         MothershipAlive = true
         _reset_invaders()
-    
-func _game_over():
+   
+
+func _wave_killed():
     if (TotalInvaders == 0 && !MothershipAlive):
         WaveKilled = true
-        return false
+        return true
+    return false
+ 
+func _game_over():
     if (GameOver == true): # set when the player is killed or the aliens break through
         if (MothershipAlive):
             $Mothership.disable_mothership() # we no longer want to see the Mothership
@@ -61,8 +66,9 @@ func _game_over():
                
 
 func _process(delta):
-    if (WaveKilled):
-        _new_game()
+    if (_wave_killed()):
+        $HUD.show_next_wave(TotalScore)
+        return
     if (!_game_over()):
         # fire LaserBolt when spacebar pressed
         if (PlayerAlive):
@@ -317,6 +323,7 @@ func _on_InvaderLaserBolt2_hiding():
     TotalInvaderLaserbolts -= 1    
 
 func _on_Mothership_hit():
+    print("Mothership killed!!!!")
     MothershipAlive = false
     _update_total_score(MothershipScore)    
 
@@ -762,6 +769,7 @@ func _on_LaserBolt_hiding():
     LaserBoltExists = false  
 
 func _on_Player_hit():
+    print("Player killed!!!")
     PlayerAlive = false
     # Game Over
     GameOver = true

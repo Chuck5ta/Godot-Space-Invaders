@@ -29,12 +29,18 @@ func show_game_over(score):
         GameOver = true
         show_message("Game Over", score)
         yield($MessageTimer, "timeout")
+        $StartButton.text = "START"
         $StartButton.show()
         $MessageLabel.text = "Space Invaders!"
-        $MessageLabel.show()
+        $MessageLabel.show()        
+
+# this occurs when the player wipes out a wave of invaders
+func show_next_wave(score):
+    show_message("Wave Destroyed", score)
+    $StartButton.text = "NEXT WAVE"
+    $StartButton.show()
 
 func _on_MessageTimer_timeout():
-    print("MESSAGE TIMER FIRED!!!!!")
     $ScoreLabel.hide()
     $MessageLabel.hide()   
 
@@ -42,4 +48,6 @@ func _on_StartButton_pressed():
     $StartButton.hide()
     emit_signal("start_game")
     GameOver = false
-    print("FUCK YOU!!!!!")
+    
+    
+    
