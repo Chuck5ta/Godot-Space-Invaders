@@ -33,8 +33,14 @@ func _ready():
     $InvaderSoundSpeed.start() 
 
 func _new_game():
+    GameOver = false
+    PlayerAlive = true
     $HUD.show_message("Get Ready", 0)
-    get_tree().reload_current_scene() 
+    #get_tree().reload_current_scene() 
+    _initialise()   
+    # Put Invaders back
+    TotalInvaders = 55
+    _reset_invaders()
     
 func _game_over():
     if (TotalInvaders == 0 && !MothershipAlive):
@@ -86,6 +92,74 @@ func _initialise():
         for Column in range(TotalInvadersPerRow):
             InvaderAliveStateMatrix[Row].append(true) ## show invader as being alive   
     #GameOver = false 
+
+func _reset_invaders():
+    $Player._reset_player_scene()
+    # set all invaders to alive
+    for Row in range(TotalRows):
+        for Column in range(TotalInvadersPerRow):
+            InvaderAliveStateMatrix[Row][Column] = true ## show invader as being alive  
+    # Row 0
+    $Invader00._reset_invader_scene()
+    $Invader01._reset_invader_scene()
+    $Invader02._reset_invader_scene()
+    $Invader03._reset_invader_scene()
+    $Invader04._reset_invader_scene()
+    $Invader05._reset_invader_scene()
+    $Invader06._reset_invader_scene()
+    $Invader07._reset_invader_scene()    
+    $Invader08._reset_invader_scene()
+    $Invader09._reset_invader_scene()
+    $Invader010._reset_invader_scene()
+    # Row 1
+    $Invader10._reset_invader_scene()
+    $Invader11._reset_invader_scene()
+    $Invader12._reset_invader_scene()
+    $Invader13._reset_invader_scene()
+    $Invader14._reset_invader_scene()
+    $Invader15._reset_invader_scene()
+    $Invader16._reset_invader_scene()
+    $Invader17._reset_invader_scene()    
+    $Invader18._reset_invader_scene()
+    $Invader19._reset_invader_scene()
+    $Invader110._reset_invader_scene()
+    # Row 2
+    $Invader20._reset_invader_scene()
+    $Invader21._reset_invader_scene()
+    $Invader22._reset_invader_scene()
+    $Invader23._reset_invader_scene()
+    $Invader24._reset_invader_scene()
+    $Invader25._reset_invader_scene()
+    $Invader26._reset_invader_scene()
+    $Invader27._reset_invader_scene()    
+    $Invader28._reset_invader_scene()
+    $Invader29._reset_invader_scene()
+    $Invader210._reset_invader_scene()
+    # Row 3
+    $Invader30._reset_invader_scene()
+    $Invader31._reset_invader_scene()
+    $Invader32._reset_invader_scene()
+    $Invader33._reset_invader_scene()
+    $Invader34._reset_invader_scene()
+    $Invader35._reset_invader_scene()
+    $Invader36._reset_invader_scene()
+    $Invader37._reset_invader_scene()    
+    $Invader38._reset_invader_scene()
+    $Invader39._reset_invader_scene()
+    $Invader310._reset_invader_scene()
+    # Row 4
+    $Invader40._reset_invader_scene()
+    $Invader41._reset_invader_scene()
+    $Invader42._reset_invader_scene()
+    $Invader43._reset_invader_scene()
+    $Invader44._reset_invader_scene()
+    $Invader45._reset_invader_scene()
+    $Invader46._reset_invader_scene()
+    $Invader47._reset_invader_scene()    
+    $Invader48._reset_invader_scene()
+    $Invader49._reset_invader_scene()
+    $Invader410._reset_invader_scene()
+
 
 
 #

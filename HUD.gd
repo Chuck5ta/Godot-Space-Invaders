@@ -35,6 +35,7 @@ func show_game_over(score):
 
 func _on_MessageTimer_timeout():
     print("MESSAGE TIMER FIRED!!!!!")
+    $ScoreLabel.hide()
     $MessageLabel.hide()   
 
 func _on_StartButton_pressed():

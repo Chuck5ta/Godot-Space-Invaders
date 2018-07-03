@@ -10,12 +10,18 @@ var DistanceTravelled = 0 # Distance travelled so far in pixels
 var DistanceToMoveDown = 25 #move 50 pixels down the screen
 var Attack = false # to prevent movement before the game starts 
 var AnimationSpeed = 1
+# Used for resetting the invader
+var StartPositionX = 0;
+var StartPositionY = 0;
 
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
 
 func _ready():
+    # store position
+    StartPositionX = position.x
+    StartPositionY = position.y
     $AnimatedSprite.get_sprite_frames().set_animation_speed("animate", 1)
     
 func _process(delta):
@@ -57,6 +63,7 @@ func _on_ExplosionTimer_timeout():
     # Hide the scene
     hide()
     #queue_free()
+    $ExplosionTimer.stop()
 
 func _on_VisibilityNotifier2D_screen_entered():
     Attack = false
@@ -72,3 +79,15 @@ func _disable_invader():
 func _on_VisibilityNotifier2D_screen_exited():
     # game over
     emit_signal("enteringEarth")
+    
+# Run at the start of a new level
+func _reset_invader_scene():
+    show()
+    $AnimatedSprite.show()
+    $AnimatedSprite.visible = true 
+    $Explosion.visible = false 
+    position.x = StartPositionX
+    position.y = StartPositionY
+    $AnimatedSprite.play()
+    $CollisionShape2D.disabled = false
+    Attack = true
