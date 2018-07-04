@@ -5,6 +5,8 @@ signal enteringEarth
 var SPEED = 0.4
 var MovementRight = true #Invader will move right when initially spawned
 var MovementDown = false
+# used to allow for the difference between the travel distance of the first move to the right compared with all subsequent moves
+var InitialMove = true # Invaders first movement to the far right
 var MaxDistanceToTravel = 80 # max distance to move left and right
 var DistanceTravelled = 0 # Distance travelled so far in pixels
 var DistanceToMoveDown = 10 #25 #move 50 pixels down the screen
@@ -38,6 +40,9 @@ func _process(delta):
         position.x -= SPEED
         DistanceTravelled += SPEED 
     if (DistanceTravelled >= MaxDistanceToTravel):
+        if (InitialMove):
+            InitialMove = false
+            MaxDistanceToTravel = 160
         #time to go down the screen
         MovementDown = true
         DistanceTravelled = 0
@@ -91,6 +96,7 @@ func _reset_invader_scene():
     $AnimatedSprite.play()
     $CollisionShape2D.disabled = false
     Attack = true
+    InitialMove = true 
     AnimationSpeed = 1
     DistanceToMoveDown += 1 # increses every wave
     

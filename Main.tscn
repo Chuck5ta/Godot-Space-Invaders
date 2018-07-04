@@ -454,28 +454,28 @@ _sections_unfolded = [ "Transform" ]
 [node name="Line3InvaderStartTimer" type="Timer" parent="." index="72"]
 
 process_mode = 1
-wait_time = 0.5
+wait_time = 0.3
 one_shot = true
 autostart = false
 
 [node name="Line2InvaderStartTimer" type="Timer" parent="." index="73"]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.5
 one_shot = true
 autostart = false
 
 [node name="Line1InvaderStartTimer" type="Timer" parent="." index="74"]
 
 process_mode = 1
-wait_time = 1.5
+wait_time = 0.7
 one_shot = true
 autostart = false
 
 [node name="Line0InvaderStartTimer" type="Timer" parent="." index="75"]
 
 process_mode = 1
-wait_time = 2.0
+wait_time = 0.9
 one_shot = true
 autostart = false
 
