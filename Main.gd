@@ -27,7 +27,8 @@ func _ready():
     # Called when the node is added to the scene for the first time.
     randomize()
     # Initialization here
-    _initialise()   
+    _initialise() 
+    _set_off_invaders()
     $InvaderSoundTimer.start() 
     $InvaderSoundSpeed.start() 
 
@@ -779,7 +780,6 @@ func _on_Player_hit():
     else: # reset player
         $Player._reset_player_scene()
     
-    
 func _wait():
     var t = Timer.new()
     t.set_wait_time($InvaderSoundTimer.wait_time)
@@ -800,3 +800,81 @@ func _on_InvaderSoundTimer_timeout():
     _wait()
     $InvaderMovementSound4.play()
     _wait()
+
+func _set_off_invaders():
+    $Line4InvaderStartTimer.start()  
+    $Line3InvaderStartTimer.start()  
+    $Line2InvaderStartTimer.start()  
+    $Line1InvaderStartTimer.start()  
+    $Line0InvaderStartTimer.start() 
+
+func _on_Line4InvaderStartTimer_timeout():
+    # Activate line 4 invaders  
+    $Invader40.Attack = true
+    $Invader41.Attack = true
+    $Invader42.Attack = true
+    $Invader43.Attack = true
+    $Invader44.Attack = true
+    $Invader45.Attack = true
+    $Invader46.Attack = true
+    $Invader47.Attack = true
+    $Invader48.Attack = true
+    $Invader49.Attack = true
+    $Invader410.Attack = true
+
+func _on_Line3InvaderStartTimer_timeout():
+    # Activate line 3 invaders    
+    $Invader30.Attack = true
+    $Invader31.Attack = true
+    $Invader32.Attack = true
+    $Invader33.Attack = true
+    $Invader34.Attack = true
+    $Invader35.Attack = true
+    $Invader36.Attack = true
+    $Invader37.Attack = true
+    $Invader38.Attack = true
+    $Invader39.Attack = true
+    $Invader310.Attack = true
+    
+func _on_Line2InvaderStartTimer_timeout():
+    # Activate line 2 invaders  
+    $Invader20.Attack = true
+    $Invader21.Attack = true
+    $Invader22.Attack = true
+    $Invader23.Attack = true
+    $Invader24.Attack = true
+    $Invader25.Attack = true
+    $Invader26.Attack = true
+    $Invader27.Attack = true
+    $Invader28.Attack = true
+    $Invader29.Attack = true
+    $Invader210.Attack = true
+
+func _on_Line1InvaderStartTimer_timeout():    
+    # Activate line 1 invaders  
+    $Invader10.Attack = true   
+    $Invader11.Attack = true
+    $Invader12.Attack = true
+    $Invader13.Attack = true
+    $Invader14.Attack = true
+    $Invader15.Attack = true
+    $Invader16.Attack = true
+    $Invader17.Attack = true
+    $Invader18.Attack = true
+    $Invader19.Attack = true
+    $Invader110.Attack = true
+
+func _on_Line0InvaderStartTimer_timeout():
+    # Activate line 0 invaders  
+    $Invader00.Attack = true
+    $Invader01.Attack = true
+    $Invader02.Attack = true
+    $Invader03.Attack = true
+    $Invader04.Attack = true
+    $Invader05.Attack = true
+    $Invader06.Attack = true
+    $Invader07.Attack = true
+    $Invader08.Attack = true
+    $Invader09.Attack = true
+    $Invader010.Attack = true
+

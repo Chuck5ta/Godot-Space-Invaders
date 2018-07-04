@@ -26,7 +26,7 @@ func _ready():
     
 func _process(delta):
     if (!Attack):
-        pass
+        return
     #move the Invader
     if (MovementDown):
         position.y += DistanceToMoveDown      

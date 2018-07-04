@@ -451,6 +451,41 @@ scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 16 )
 _sections_unfolded = [ "Transform" ]
 
+[node name="Line3InvaderStartTimer" type="Timer" parent="." index="72"]
+
+process_mode = 1
+wait_time = 0.5
+one_shot = true
+autostart = false
+
+[node name="Line2InvaderStartTimer" type="Timer" parent="." index="73"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="Line1InvaderStartTimer" type="Timer" parent="." index="74"]
+
+process_mode = 1
+wait_time = 1.5
+one_shot = true
+autostart = false
+
+[node name="Line0InvaderStartTimer" type="Timer" parent="." index="75"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = true
+autostart = false
+
+[node name="Line4InvaderStartTimer" type="Timer" parent="." index="76"]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = true
+autostart = false
+
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
 [connection signal="enteringEarth" from="Invader40" to="." method="_on_Invader_entering_earth"]
@@ -686,5 +721,15 @@ _sections_unfolded = [ "Transform" ]
 [connection signal="timeout" from="InvaderSoundTimer" to="." method="_on_InvaderSoundTimer_timeout"]
 
 [connection signal="timeout" from="InvaderSoundSpeed" to="." method="_on_InvaderSoundSpeed_timeout"]
+
+[connection signal="timeout" from="Line3InvaderStartTimer" to="." method="_on_Line3InvaderStartTimer_timeout"]
+
+[connection signal="timeout" from="Line2InvaderStartTimer" to="." method="_on_Line2InvaderStartTimer_timeout"]
+
+[connection signal="timeout" from="Line1InvaderStartTimer" to="." method="_on_Line1InvaderStartTimer_timeout"]
+
+[connection signal="timeout" from="Line0InvaderStartTimer" to="." method="_on_Line0InvaderStartTimer_timeout"]
+
+[connection signal="timeout" from="Line4InvaderStartTimer" to="." method="_on_Line4InvaderStartTimer_timeout"]
 
 
