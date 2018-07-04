@@ -29,6 +29,9 @@ func _ready():
     # Initialization here
     _initialise()   
     $InvaderSoundTimer.start() 
+    $InvaderSoundTimer2.start() 
+    $InvaderSoundTimer3.start() 
+    $InvaderSoundTimer4.start() 
     $InvaderSoundSpeed.start() 
 
 func _new_game():
@@ -36,7 +39,6 @@ func _new_game():
         $HUD.show_message("Get Ready", TotalScore)     
         get_tree().reload_current_scene() 
     else: # continue to next wave
-        $Timer.start()
         print("***** NEW WAVE ******")
         WaveKilled = false
         PlayerAlive = true
@@ -50,11 +52,10 @@ func _new_game():
         $InvaderSoundTimer.wait_time = 1
         $InvaderSoundSpeed.wait_time = 10
         $InvaderSoundTimer.start() 
+        $InvaderSoundTimer2.start() 
+        $InvaderSoundTimer3.start() 
+        $InvaderSoundTimer4.start() 
         $InvaderSoundSpeed.start() 
-        $InvaderMovementSound1.play()   
-        $InvaderMovementSound2.play()   
-        $InvaderMovementSound3.play()   
-        $InvaderMovementSound4.play()  
    
 
 func _wave_killed():
@@ -74,11 +75,10 @@ func _game_over():
 
 func _process(delta):
     if (TotalInvaders == 0):        
-        $InvaderMovementSound1.stop()   
-        $InvaderMovementSound2.stop()   
-        $InvaderMovementSound3.stop()   
-        $InvaderMovementSound4.stop()  
         $InvaderSoundTimer.stop() 
+        $InvaderSoundTimer2.stop() 
+        $InvaderSoundTimer3.stop() 
+        $InvaderSoundTimer4.stop() 
         $InvaderSoundSpeed.stop()         
     if (_wave_killed()):
         $HUD.show_next_wave(TotalScore)
@@ -103,11 +103,10 @@ func _process(delta):
                 _invaders_fire_laserbolts(NoOfLaserToFire+1) # fire 1 or 2 lasers
     else:           
         $InvaderSoundTimer.stop() 
-        $InvaderSoundSpeed.stop() 
-        $InvaderMovementSound1.stop()   
-        $InvaderMovementSound2.stop()   
-        $InvaderMovementSound3.stop()   
-        $InvaderMovementSound4.stop()        
+        $InvaderSoundTimer2.stop() 
+        $InvaderSoundTimer3.stop() 
+        $InvaderSoundTimer4.stop()
+        $InvaderSoundSpeed.stop()       
         $HUD.show_game_over(TotalScore)
         # clear remaining invaders
         if (TotalInvaders > 0):
@@ -792,26 +791,43 @@ func _on_Player_hit():
     else: # reset player
         $Player._reset_player_scene()
     
-
-func _wait(WaitTime):
+    
+func _wait():
     var t = Timer.new()
-    t.set_wait_time(WaitTime)
+    t.set_wait_time($InvaderSoundTimer.wait_time)
     t.set_one_shot(true)
     self.add_child(t)
     t.start()
     yield(t, "timeout")
 
-func _on_InvaderSoundTimer_timeout():
-    $InvaderMovementSound1.play()
-    $InvaderMovementSound2.play()
-    $InvaderMovementSound3.play()
-    $InvaderMovementSound4.play()
-
 
 func _on_InvaderSoundSpeed_timeout():
-    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 1.5
+    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 1.2
+    #$InvaderSoundTimer2.wait_time = $InvaderSoundTimer2.wait_time / 1.5
+    #$InvaderSoundTimer3.wait_time = $InvaderSoundTimer3.wait_time / 1.5
+    #$InvaderSoundTimer4.wait_time = $InvaderSoundTimer4.wait_time / 1.5
+
+func _on_InvaderSoundTimer_timeout():
+    $InvaderMovementSound1.play()
+    _wait()
+    $InvaderMovementSound2.play()
+    _wait()
+    $InvaderMovementSound3.play()
+    _wait()
+    $InvaderMovementSound4.play()
+    _wait()
 
 
-func _on_Timer_timeout():
-    print("TOTAL INVADERS: ",TotalInvaders)
-    print("MOTHERSHIP ALIVE STATE: ", MothershipAlive)
+func _on_InvaderSoundTimer2_timeout():
+    pass
+    $InvaderMovementSound2.play()
+
+
+func _on_InvaderSoundTimer3_timeout():
+    pass
+    $InvaderMovementSound3.play()
+
+
+func _on_InvaderSoundTimer4_timeout():
+    pass
+    $InvaderMovementSound4.play()

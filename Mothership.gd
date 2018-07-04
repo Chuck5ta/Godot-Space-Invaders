@@ -2,14 +2,14 @@ extends RigidBody2D
 signal hit
 
 var Flying = false
-var FlyDirection = 5 # move right
+var FlyDirection = 5 # +5 move right, -5 move left across the screen
 var MothershipAlive = true
 # Used for resetting the mothership
 var StartPositionX = 0;
 var StartPositionY = 0;
 
 func _ready():  
-    # store position
+    # store starting position - required for resetting for the next wave
     StartPositionX = position.x
     StartPositionY = position.y  
     randomize()
@@ -20,29 +20,22 @@ func _process(delta):
         position.x += FlyDirection
 
 func _on_AppearTimer_timeout():
-    #show()
+    $AppearTimer.stop()
     $FlyingSound.play();
-    var WaitTime = randi() % 5
-    $AppearTimer.wait_time = WaitTime
+    $AppearTimer.wait_time = 10 + randi() % 11  # between 10 and 20
+    $AppearTimer.start()
     Flying = true
-
 
 func _on_VisibilityNotifier2D_screen_exited():
     if (MothershipAlive):
         Flying = false
         $FlyingSound.stop();
-        print("Mothership POP")
         if (FlyDirection == 5):
             FlyDirection = -5
         else: 
             FlyDirection = 5
     else:
         $AppearTimer.stop()
-    # restart the timer
-    #$AppearTimer.stop()
-    #$AppearTimer.start()
-    
-
 
 func _on_Mothership_body_entered(body):
     print("Mothership has been hit!!")
@@ -55,11 +48,6 @@ func _on_Mothership_body_entered(body):
     $ExplosionSprite.visible = true 
     $ExplosionTimer.start() 
     $AppearTimer.stop()
-    # hide animation    
-    #$AnimatedSprite.stop()
-    #$AnimatedSprite.visible = false  
-    #$Explosion.visible = true   
-
 
 func _on_ExplsionTimer_timeout():
     $ExplosionSprite.visible = false
@@ -70,7 +58,6 @@ func disable_mothership():
     $MothershipSprite.visible = false 
     $AppearTimer.stop()
     
-    
 # Run at the start of a new level
 func _reset_mothership_scene():
     show()  
@@ -79,7 +66,6 @@ func _reset_mothership_scene():
     position.x = StartPositionX
     position.y = StartPositionY
     MothershipAlive = true
-    Flying = true
     FlyDirection = 5 # move right
     $CollisionShape2D.disabled = false
     $AppearTimer.start()

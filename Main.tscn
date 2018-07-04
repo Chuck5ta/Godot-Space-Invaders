@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -12,11 +12,10 @@
 [ext_resource path="res://Mothership.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Font/Xolonium-Regular.ttf" type="DynamicFontData" id=11]
 [ext_resource path="res://HUD.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Sounds/fastinvader4.wav" type="AudioStream" id=13]
-[ext_resource path="res://Sounds/fastinvader3.wav" type="AudioStream" id=14]
-[ext_resource path="res://Sounds/fastinvader2.wav" type="AudioStream" id=15]
-[ext_resource path="res://Sounds/fastinvader1.wav" type="AudioStream" id=16]
-[ext_resource path="res://Art/player.png" type="Texture" id=17]
+[ext_resource path="res://Sounds/fastinvader3.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/fastinvader2.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/fastinvader1.wav" type="AudioStream" id=15]
+[ext_resource path="res://Art/player.png" type="Texture" id=16]
 
 [sub_resource type="DynamicFont" id=1]
 
@@ -399,27 +398,27 @@ bus = ""
 
 [node name="InvaderMovementSound2" type="AudioStreamPlayer" parent="." index="65"]
 
-stream = ExtResource( 14 )
+stream = ExtResource( 13 )
 volume_db = 0.0
-pitch_scale = 1.0
+pitch_scale = 1.25
 autoplay = false
 mix_target = 0
 bus = ""
 
 [node name="InvaderMovementSound3" type="AudioStreamPlayer" parent="." index="66"]
 
-stream = ExtResource( 15 )
+stream = ExtResource( 14 )
 volume_db = 0.0
-pitch_scale = 1.0
+pitch_scale = 1.5
 autoplay = false
 mix_target = 0
 bus = ""
 
 [node name="InvaderMovementSound4" type="AudioStreamPlayer" parent="." index="67"]
 
-stream = ExtResource( 16 )
+stream = ExtResource( 15 )
 volume_db = 0.0
-pitch_scale = 1.0
+pitch_scale = 1.75
 autoplay = false
 mix_target = 0
 bus = ""
@@ -431,33 +430,47 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="InvaderSoundSpeed" type="Timer" parent="." index="69"]
+[node name="InvaderSoundTimer2" type="Timer" parent="." index="69"]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = false
+
+[node name="InvaderSoundTimer3" type="Timer" parent="." index="70"]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = false
+autostart = false
+
+[node name="InvaderSoundTimer4" type="Timer" parent="." index="71"]
+
+process_mode = 1
+wait_time = 4.0
+one_shot = false
+autostart = false
+
+[node name="InvaderSoundSpeed" type="Timer" parent="." index="72"]
 
 process_mode = 1
 wait_time = 10.0
 one_shot = false
 autostart = false
 
-[node name="PlayerLife" type="Sprite" parent="." index="70"]
+[node name="PlayerLife" type="Sprite" parent="." index="73"]
 
 position = Vector2( 35.6044, 742.781 )
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 17 )
+texture = ExtResource( 16 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="PlayerLife2" type="Sprite" parent="." index="71"]
+[node name="PlayerLife2" type="Sprite" parent="." index="74"]
 
 position = Vector2( 77.6044, 742.781 )
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 17 )
+texture = ExtResource( 16 )
 _sections_unfolded = [ "Transform" ]
-
-[node name="Timer" type="Timer" parent="." index="72"]
-
-process_mode = 1
-wait_time = 20.0
-one_shot = false
-autostart = false
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
@@ -693,8 +706,12 @@ autostart = false
 
 [connection signal="timeout" from="InvaderSoundTimer" to="." method="_on_InvaderSoundTimer_timeout"]
 
-[connection signal="timeout" from="InvaderSoundSpeed" to="." method="_on_InvaderSoundSpeed_timeout"]
+[connection signal="timeout" from="InvaderSoundTimer2" to="." method="_on_InvaderSoundTimer2_timeout"]
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="InvaderSoundTimer3" to="." method="_on_InvaderSoundTimer3_timeout"]
+
+[connection signal="timeout" from="InvaderSoundTimer4" to="." method="_on_InvaderSoundTimer4_timeout"]
+
+[connection signal="timeout" from="InvaderSoundSpeed" to="." method="_on_InvaderSoundSpeed_timeout"]
 
 
