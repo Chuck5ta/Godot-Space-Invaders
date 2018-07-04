@@ -29,9 +29,6 @@ func _ready():
     # Initialization here
     _initialise()   
     $InvaderSoundTimer.start() 
-    $InvaderSoundTimer2.start() 
-    $InvaderSoundTimer3.start() 
-    $InvaderSoundTimer4.start() 
     $InvaderSoundSpeed.start() 
 
 func _new_game():
@@ -52,9 +49,6 @@ func _new_game():
         $InvaderSoundTimer.wait_time = 1
         $InvaderSoundSpeed.wait_time = 10
         $InvaderSoundTimer.start() 
-        $InvaderSoundTimer2.start() 
-        $InvaderSoundTimer3.start() 
-        $InvaderSoundTimer4.start() 
         $InvaderSoundSpeed.start() 
    
 
@@ -75,10 +69,7 @@ func _game_over():
 
 func _process(delta):
     if (TotalInvaders == 0):        
-        $InvaderSoundTimer.stop() 
-        $InvaderSoundTimer2.stop() 
-        $InvaderSoundTimer3.stop() 
-        $InvaderSoundTimer4.stop() 
+        $InvaderSoundTimer.stop()  
         $InvaderSoundSpeed.stop()         
     if (_wave_killed()):
         $HUD.show_next_wave(TotalScore)
@@ -103,9 +94,6 @@ func _process(delta):
                 _invaders_fire_laserbolts(NoOfLaserToFire+1) # fire 1 or 2 lasers
     else:           
         $InvaderSoundTimer.stop() 
-        $InvaderSoundTimer2.stop() 
-        $InvaderSoundTimer3.stop() 
-        $InvaderSoundTimer4.stop()
         $InvaderSoundSpeed.stop()       
         $HUD.show_game_over(TotalScore)
         # clear remaining invaders
@@ -800,12 +788,8 @@ func _wait():
     t.start()
     yield(t, "timeout")
 
-
 func _on_InvaderSoundSpeed_timeout():
-    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 1.2
-    #$InvaderSoundTimer2.wait_time = $InvaderSoundTimer2.wait_time / 1.5
-    #$InvaderSoundTimer3.wait_time = $InvaderSoundTimer3.wait_time / 1.5
-    #$InvaderSoundTimer4.wait_time = $InvaderSoundTimer4.wait_time / 1.5
+    $InvaderSoundTimer.wait_time = $InvaderSoundTimer.wait_time / 1.1
 
 func _on_InvaderSoundTimer_timeout():
     $InvaderMovementSound1.play()
@@ -816,18 +800,3 @@ func _on_InvaderSoundTimer_timeout():
     _wait()
     $InvaderMovementSound4.play()
     _wait()
-
-
-func _on_InvaderSoundTimer2_timeout():
-    pass
-    $InvaderMovementSound2.play()
-
-
-func _on_InvaderSoundTimer3_timeout():
-    pass
-    $InvaderMovementSound3.play()
-
-
-func _on_InvaderSoundTimer4_timeout():
-    pass
-    $InvaderMovementSound4.play()

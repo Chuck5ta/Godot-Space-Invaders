@@ -32,20 +32,18 @@ func _process(delta):
         position.x = clamp(position.x, 0, screensize.x)
         position.y = clamp(position.y, 0, screensize.y)
 
-
 func _on_Player_body_entered(body):
-    print("Player has been hit!!")
-    $CollisionShape2D.disabled = true
-    PlayerAlive = false
-    # hide animation  
-    $Sprite.visible = false 
-    $AnimatedSprite.visible = true    
-    $AnimatedSprite.play()  
-    $ExplosionSound.play()
-    $ExplosionTimer.start()
-    yield($ExplosionTimer, "timeout")
-    emit_signal("hit")
-
+    if (PlayerAlive): # used to prevent double kill (2 lives lost) at the same time
+        $CollisionShape2D.disabled = true
+        PlayerAlive = false
+        # hide animation  
+        $Sprite.visible = false 
+        $AnimatedSprite.visible = true    
+        $AnimatedSprite.play()  
+        $ExplosionSound.play()
+        $ExplosionTimer.start()
+        yield($ExplosionTimer, "timeout")
+        emit_signal("hit")
 
 func _on_ExplosionTimer_timeout():
     # Hide the scene
@@ -54,7 +52,6 @@ func _on_ExplosionTimer_timeout():
     $AnimatedSprite.visible = false
     $Sprite.visible = true  
     $ExplosionTimer.stop() 
-    
     
 # Run at the start of a new level
 func _reset_player_scene():
