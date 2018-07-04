@@ -73,13 +73,14 @@ func _game_over():
                
 
 func _process(delta):
-    if (_wave_killed()):
+    if (TotalInvaders == 0):        
         $InvaderMovementSound1.stop()   
         $InvaderMovementSound2.stop()   
         $InvaderMovementSound3.stop()   
         $InvaderMovementSound4.stop()  
         $InvaderSoundTimer.stop() 
-        $InvaderSoundSpeed.stop() 
+        $InvaderSoundSpeed.stop()         
+    if (_wave_killed()):
         $HUD.show_next_wave(TotalScore)
         return
     if (!_game_over()):
