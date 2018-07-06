@@ -20,33 +20,22 @@ animations = [ {
 "speed": 2.0
 } ]
 
-[node name="Player" type="RigidBody2D" index="0"]
+[node name="Player" type="Area2D" index="0"]
 
 position = Vector2( 506.582, 568.823 )
 scale = Vector2( 1, 0.871724 )
-input_pickable = false
-collision_layer = 1
-collision_mask = 1
-mode = 3
-mass = 1.0
-friction = 1.0
-bounce = 0.0
-gravity_scale = 1.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = true
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = ""
 script = ExtResource( 1 )
 _sections_unfolded = [ "Linear", "Transform" ]
 SPEED = 600
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
+[node name="PlayerSprite" type="Sprite" parent="." index="0"]
 
 scale = Vector2( 0.33, 0.33 )
 texture = ExtResource( 2 )
@@ -85,7 +74,7 @@ attenuation = 1.0
 bus = ""
 area_mask = 1
 
-[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Player_area_entered"]
 
 [connection signal="timeout" from="ExplosionTimer" to="." method="_on_ExplosionTimer_timeout"]
 

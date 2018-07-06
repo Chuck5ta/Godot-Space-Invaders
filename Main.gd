@@ -1,5 +1,6 @@
 extends Node
 
+
 # Player related
 var PlayerAlive = true
 var LaserBoltExists = false
@@ -21,6 +22,9 @@ var MothershipScore = 100
 # Game Over - Wave Killed
 var GameOver = false
 var WaveKilled = false
+var WaveNumber = 1
+
+var fireTest = true
 
 
 func _ready():
@@ -41,6 +45,7 @@ func _new_game():
         WaveKilled = false
         PlayerAlive = true
         $HUD.show_message("Get Ready", TotalScore)
+        WaveNumber += 1
         # Put Invaders back
         TotalInvaders = 55
         MothershipAlive = true
@@ -51,29 +56,13 @@ func _new_game():
         $InvaderSoundSpeed.wait_time = 10
         $InvaderSoundTimer.start() 
         $InvaderSoundSpeed.start() 
-   
-
-func _wave_killed():
-    if (TotalInvaders == 0 && !MothershipAlive):
-        print("----==== WAVE KILLED ====----")
-        WaveKilled = true
-        return true
-    return false
- 
-func _game_over():
-    if (GameOver == true): # set when the player is killed or the aliens break through
-        if (MothershipAlive):
-            $Mothership.disable_mothership() # we no longer want to see the Mothership
-        return true
-    return false
-               
-
+        
 func _process(delta):
     if (TotalInvaders == 0):        
         $InvaderSoundTimer.stop()  
         $InvaderSoundSpeed.stop()         
     if (_wave_killed()):
-        $HUD.show_next_wave(TotalScore)
+        $HUD.show_next_wave(TotalScore, WaveNumber)
         return
     if (!_game_over()):
         # fire LaserBolt when spacebar pressed
@@ -82,28 +71,63 @@ func _process(delta):
                 LaserBoltExists = true
                 $LaserBolt.position= $Player.position
                 $LaserBolt.position.y -= 22 # position it just above the gun tip
-                $LaserBolt.show()
                 $LaserBolt._reset_laserbolt()
                 $LaserBoltSound.play()
             
-        # INVADERS FIRING LASER (only 2 lasers allowed to exist)
+  #      while (fireTest):
+  #          _invader_fire_laser($Invader44)
+  #          fireTest = false
+        # INVAD
+        
         if (TotalInvaderLaserbolts == 0):
-            var invaderFire = randi() % 100 # we don't want the invaders firing too often
-            if (invaderFire < 25):
-                var NoOfLaserToFire = randi() % 2
-                # while (TotalInvaderLaserbolts != NoOfLaserToFire):
+            var invaderFire = randi() % 100 # we don't want the invaders firing too often        
+            if (invaderFire < 25):                
+                var NoOfLaserToFire = randi() % 2      
                 _invaders_fire_laserbolts(NoOfLaserToFire+1) # fire 1 or 2 lasers
     else:           
-        $InvaderSoundTimer.stop() 
-        $InvaderSoundSpeed.stop()       
+        #$InvaderSoundTimer.stop() 
+        #$InvaderSoundSpeed.stop()       
         $HUD.show_game_over(TotalScore)
         # clear remaining invaders
         if (TotalInvaders > 0):
             _clear_invaders()
 
-#
+ 
+func _game_over():
+    if (GameOver == true): # set when the player is killed or the aliens break through
+        if (MothershipAlive):
+            $Mothership.disable_mothership() # we no longer want to see the Mothership
+        return true
+    return false
+   
+func _wave_killed():
+    if (TotalInvaders == 0 && !MothershipAlive):
+        print("----==== WAVE KILLED ====----")
+        WaveKilled = true
+        return true
+    return false
+    
+
+# ============
+# HUD related
+# ============       
+
+# Top right of screen
+func _update_total_score(NewScore):
+    TotalScore += NewScore
+    $TotalScore.text = str(TotalScore)
+
+# Game Over UI (HUD scen)
+func update_score(score):
+    $ScoreLabel.text = str(score)
+
+
+# =================
+# INVADERS RELATED
+# =================
+
 # Game Start
-# ===========
+# -----------
 
 func _initialise():
     # set all invaders to alive
@@ -111,7 +135,9 @@ func _initialise():
         InvaderAliveStateMatrix.append([])
         for Column in range(TotalInvadersPerRow):
             InvaderAliveStateMatrix[Row].append(true) ## show invader as being alive   
-    #GameOver = false 
+
+# New Wave - after successfully destroying a wave of invaders
+# ---------
 
 func _reset_invaders():
     # set all invaders to alive
@@ -179,19 +205,8 @@ func _reset_invaders():
     $Invader49._reset_invader_scene()
     $Invader410._reset_invader_scene()
 
-
-
-#
-# INVADERS RELATED
-# =================
-
-
-# Invader has broken through to Earth
-func _on_Invader_entering_earth():
-    GameOver = true
-
-
 # Called when the game is over
+# this is required in order to hide the invaders while the Game Over/new game (HUD) screen is up
 func _clear_invaders():
     #loop through Alive matrix to see who needs disabling
     # row 0
@@ -309,46 +324,41 @@ func _clear_invaders():
         $Invader49._disable_invader()
     if (InvaderAliveStateMatrix[4][10] == true):
         $Invader410._disable_invader()
-        
 
-# Top right of screen
-func _update_total_score(NewScore):
-    TotalScore += NewScore
-    $TotalScore.text = str(TotalScore)
-
-# Game Over UI (HUD scen)
-func update_score(score):
-    $ScoreLabel.text = str(score)
+# Invader laser bolt
+# -------------------   
     
 func _on_InvaderLaserBolt1_hiding():
-    TotalInvaderLaserbolts -= 1    
+    TotalInvaderLaserbolts -= 1  
+    if (TotalInvaderLaserbolts < 0):
+        TotalInvaderLaserbolts = 0
 
 func _on_InvaderLaserBolt2_hiding():
-    TotalInvaderLaserbolts -= 1    
-
-func _on_Mothership_hit():
-    print("Mothership killed!!!!")
-    MothershipAlive = false
-    _update_total_score(MothershipScore)    
+    TotalInvaderLaserbolts -= 1 
+    if (TotalInvaderLaserbolts < 0):
+        TotalInvaderLaserbolts = 0   
 
 func _invader_killed(Row, Column, InvaderScore):
     InvaderAliveStateMatrix[Row][Column] = false
-    print("Invader at ", Row, " ", Column, " alive state is: ",  InvaderAliveStateMatrix[Row][Column])
     _update_total_score(InvaderScore)
     LaserBoltExists = false
-    TotalInvaders -= 1 # Game Over when 0 invaders left    
+    TotalInvaders -= 1 # Game Over when 0 invaders left (+ mothership dead)    
+
 
 func _invader_fire_laser(Invader):
-    print("**** FIRE *****")
-    if (TotalInvaderLaserbolts == 0):
+    if (!$InvaderLaserBolt1.LaserBoltMoving):
         $InvaderLaserBolt1.position = Invader.position
-        $InvaderLaserBolt1.position.y += 28 # position it just above the gun tip  
+        $InvaderLaserBolt1.position.y += 50 # position it just below the invader
         $InvaderLaserBolt1._reset_laserbolt()
-    else:
+    elif (!$InvaderLaserBolt2.LaserBoltMoving):
         $InvaderLaserBolt2.position = Invader.position
-        $InvaderLaserBolt2.position.y += 28 # position it just above the gun tip
+        $InvaderLaserBolt2.position.y += 50 # position it just below the invader
         $InvaderLaserBolt2._reset_laserbolt()
     TotalInvaderLaserbolts += 1
+
+
+
+
 
 func _get_invader(row, column):
     if (row == 0):
@@ -487,20 +497,17 @@ func _invaders_fire_laserbolts(TotalLasersToFire):
         # row 3 - check for invaders on rows 4        
         if (InvaderToCheckRow == 4 && TotalInvaderLaserbolts < 2):
             # fire laser from this invader
-            print("It can fire")
             _get_invader(InvaderToCheckRow, InvaderToCheckColumn)
         elif (InvaderToCheckRow == 3 && TotalInvaderLaserbolts < 2):
             # make sure an invader is not in front of it
             if (InvaderAliveStateMatrix[InvaderToCheckRow + 1][InvaderToCheckColumn] == false):
                 # fire laser
-                print("It can fire")
                 _get_invader(InvaderToCheckRow, InvaderToCheckColumn)
         elif (InvaderToCheckRow == 2 && TotalInvaderLaserbolts < 2):
             # make sure an invader is not in front of it
             if (InvaderAliveStateMatrix[InvaderToCheckRow + 1][InvaderToCheckColumn] == false &&  # check row 3
                 InvaderAliveStateMatrix[InvaderToCheckRow + 2][InvaderToCheckColumn] == false):   # check row 4
                 # fire laser
-                print("It can fire")
                 _get_invader(InvaderToCheckRow, InvaderToCheckColumn)
         elif (InvaderToCheckRow == 1 && TotalInvaderLaserbolts < 2):
             # make sure an invader is not in front of it
@@ -508,7 +515,6 @@ func _invaders_fire_laserbolts(TotalLasersToFire):
                 InvaderAliveStateMatrix[InvaderToCheckRow + 2][InvaderToCheckColumn] == false &&  # check row 3
                 InvaderAliveStateMatrix[InvaderToCheckRow + 3][InvaderToCheckColumn] == false):   # check row 4
                 # fire laser
-                print("It can fire")
                 _get_invader(InvaderToCheckRow, InvaderToCheckColumn)
         elif (InvaderToCheckRow == 0 && TotalInvaderLaserbolts < 2):
             # make sure an invader is not in front of it
@@ -517,7 +523,6 @@ func _invaders_fire_laserbolts(TotalLasersToFire):
                 InvaderAliveStateMatrix[InvaderToCheckRow + 3][InvaderToCheckColumn] == false &&  # check row 3
                 InvaderAliveStateMatrix[InvaderToCheckRow + 4][InvaderToCheckColumn] == false):   # check row 4
                 # fire laser
-                print("It can fire")
                 _get_invader(InvaderToCheckRow, InvaderToCheckColumn)
                 
 
@@ -756,30 +761,16 @@ func _on_Invader49_hit():
 func _on_Invader410_hit():
     print("Invader 4 10 DEAD!")
     _invader_killed(4, 10, Invader1Score)
+ 
+#
+# Invader movement sound - TODO needs fixing!!!
+# ----------------------------------------------
 
-
-
-# PLAYER RELATED
-# ===============
-
-# this allows for a new bolt to be fired
-func _on_LaserBolt_hiding(): 
-    LaserBoltExists = false  
-
-func _on_Player_hit():
-    TotalPlayerLives -= 1
-    if (TotalPlayerLives == 2):
-        # remove 2nd player life image (bottom left of screen)
-        $PlayerLife2.hide()
-    elif (TotalPlayerLives == 1):
-        $PlayerLife.hide()
-    if (TotalPlayerLives == 0):
-        PlayerAlive = false
-        # Game Over
-        GameOver = true
-    else: # reset player
-        $Player._reset_player_scene()
-    
+# Invader has broken through to Earth
+func _on_Invader_entering_earth():
+    GameOver = true
+   
+# TODO - lose this! 
 func _wait():
     var t = Timer.new()
     t.set_wait_time($InvaderSoundTimer.wait_time)
@@ -878,3 +869,33 @@ func _on_Line0InvaderStartTimer_timeout():
     $Invader09.Attack = true
     $Invader010.Attack = true
 
+
+# Mothership related
+# ===================
+
+func _on_Mothership_hit():
+    print("Mothership killed!!!!")
+    MothershipAlive = false
+    _update_total_score(MothershipScore)    
+
+
+# PLAYER RELATED
+# ===============
+
+# this allows for a new bolt to be fired
+func _on_LaserBolt_hiding(): 
+    LaserBoltExists = false  
+
+func _on_Player_hit():
+    TotalPlayerLives -= 1
+    if (TotalPlayerLives == 2):
+        # remove 2nd player life image (bottom left of screen)
+        $PlayerLife2.hide()
+    elif (TotalPlayerLives == 1):
+        $PlayerLife.hide()
+    if (TotalPlayerLives == 0):
+        PlayerAlive = false
+        # Game Over
+        GameOver = true
+    else: # reset player
+        $Player._reset_player_scene()

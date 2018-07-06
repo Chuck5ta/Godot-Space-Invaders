@@ -14,33 +14,24 @@ animations = [ {
 "name": "animate",
 "speed": 1.0
 } ]
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Invader1" type="RigidBody2D" index="0"]
+[node name="Invader1" type="Area2D" index="0"]
 
 position = Vector2( 464.571, 48.1645 )
-input_pickable = false
-collision_layer = 1
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
 collision_mask = 0
-mode = 3
-mass = 1.0
-friction = 1.0
-bounce = 0.0
-gravity_scale = 0.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 1
-contact_monitor = true
-sleeping = false
-can_sleep = true
-linear_velocity = Vector2( 0, 0 )
-linear_damp = -1.0
-angular_velocity = 0.0
-angular_damp = -1.0
+audio_bus_override = false
+audio_bus_name = ""
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision", "collision" ]
 
@@ -49,8 +40,7 @@ _sections_unfolded = [ "Collision", "collision" ]
 scale = Vector2( 5, 5 )
 frames = SubResource( 1 )
 animation = "animate"
-frame = 1
-_sections_unfolded = [ "Transform", "Visibility" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
@@ -85,7 +75,7 @@ autostart = false
 
 rect = Rect2( -10, -10, 20, 20 )
 
-[connection signal="body_entered" from="." to="." method="_on_Invader1_body_entered"]
+[connection signal="area_entered" from="." to="." method="_on_Invader_area_entered"]
 
 [connection signal="timeout" from="ExplosionTimer" to="." method="_on_ExplosionTimer_timeout"]
 

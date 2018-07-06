@@ -1,5 +1,5 @@
-extends RigidBody2D
-#export (PackedScene) var ExplodingInvader
+extends Area2D
+
 signal hit
 signal enteringEarth
 var SPEED = 0.4
@@ -51,18 +51,6 @@ func _process(delta):
         SPEED += 0.01
         AnimationSpeed += SPEED
         $AnimatedSprite.frames.set_animation_speed("animate", AnimationSpeed)
-    
-func _on_Invader1_body_entered(body):
-    $CollisionShape2D.disabled = true
-    print("Invader has been hit!!")
-    print(body)
-    # hide animation    
-    $AnimatedSprite.stop()
-    $AnimatedSprite.visible = false  
-    $Explosion.visible = true    
-    $ExplosionSound.play()
-    $ExplosionTimer.start()
-    emit_signal("hit")
 
 func _on_ExplosionTimer_timeout():
     # Hide the scene
@@ -99,4 +87,14 @@ func _reset_invader_scene():
     InitialMove = true 
     AnimationSpeed = 1
     DistanceToMoveDown += 1 # increses every wave
-    
+
+func _on_Invader_area_entered(area):
+    $CollisionShape2D.disabled = true
+    print("Invader has been hit!!")
+    # hide animation    
+    $AnimatedSprite.stop()
+    $AnimatedSprite.visible = false  
+    $Explosion.visible = true    
+    $ExplosionSound.play()
+    $ExplosionTimer.start()
+    emit_signal("hit")

@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 signal hit
 signal hiding
 
@@ -15,7 +15,6 @@ func _ready():
 
 func _process(delta):
     # move the laser bolt up the screen
-    print("Laserbolt Moving ", LaserBoltMoving)
     if (LaserBoltMoving):
         position.y -= SPEED 
 
@@ -28,12 +27,13 @@ func _disable_laserbolt():
 func _on_VisibilityNotifier2D_screen_exited():
     # stop the laser bolt moving 
     _disable_laserbolt()
+    
+func _reset_laserbolt():
+    show()
+    LaserBoltMoving = true
+    $CollisionShape2D.disabled = false 
 
-func _on_LaserBolt_body_entered(body):
+func _on_LaserBolt_area_entered(area):
     # delete the laser bolt
     print("Laser bolt has hit the target!")
     _disable_laserbolt()
-    
-func _reset_laserbolt():
-    LaserBoltMoving = true
-    $CollisionShape2D.disabled = false 

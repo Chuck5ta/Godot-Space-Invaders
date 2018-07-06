@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Player.tscn" type="PackedScene" id=2]
@@ -7,22 +7,23 @@
 [ext_resource path="res://Invader2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Invader3.tscn" type="PackedScene" id=6]
 [ext_resource path="res://LaserBolt.tscn" type="PackedScene" id=7]
-[ext_resource path="res://InvaderLaserBolt.tscn" type="PackedScene" id=8]
-[ext_resource path="res://InvaderLaserBolt2.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Mothership.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Font/Xolonium-Regular.ttf" type="DynamicFontData" id=11]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Sounds/fastinvader3.wav" type="AudioStream" id=13]
-[ext_resource path="res://Sounds/fastinvader2.wav" type="AudioStream" id=14]
-[ext_resource path="res://Sounds/fastinvader1.wav" type="AudioStream" id=15]
-[ext_resource path="res://Art/player.png" type="Texture" id=16]
+[ext_resource path="res://Mothership.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Font/Xolonium-Regular.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Sounds/fastinvader3.wav" type="AudioStream" id=11]
+[ext_resource path="res://Sounds/fastinvader2.wav" type="AudioStream" id=12]
+[ext_resource path="res://Sounds/fastinvader1.wav" type="AudioStream" id=13]
+[ext_resource path="res://Art/player.png" type="Texture" id=14]
+[ext_resource path="res://Barrier1.tscn" type="PackedScene" id=15]
+[ext_resource path="res://InvaderLaserBolt.tscn" type="PackedScene" id=16]
+[ext_resource path="res://InvaderLaserBolt2.tscn" type="PackedScene" id=17]
 
 [sub_resource type="DynamicFont" id=1]
 
 size = 32
 use_mipmaps = false
 use_filter = false
-font_data = ExtResource( 11 )
+font_data = ExtResource( 9 )
 _sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Main" type="Node" index="0"]
@@ -32,7 +33,6 @@ script = ExtResource( 1 )
 [node name="Player" parent="." index="0" instance=ExtResource( 2 )]
 
 position = Vector2( 491.582, 704.823 )
-contacts_reported = 5
 
 [node name="LaserBoltSound" type="AudioStreamPlayer" parent="." index="1"]
 
@@ -320,26 +320,11 @@ _sections_unfolded = [ "Collision", "Transform", "collision" ]
 
 [node name="LaserBolt" parent="." index="57" instance=ExtResource( 7 )]
 
-gravity_scale = 0.0
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="InvaderLaserBolt1" parent="." index="58" instance=ExtResource( 8 )]
+[node name="Mothership" parent="." index="58" instance=ExtResource( 8 )]
 
-position = Vector2( -684.67, 46.2221 )
-mode = 3
-SPEED = 5
-
-[node name="InvaderLaserBolt2" parent="." index="59" instance=ExtResource( 9 )]
-
-position = Vector2( -331.543, 36.979 )
-mode = 3
-gravity_scale = 0.0
-_sections_unfolded = [ "Collision", "Transform", "Z Index" ]
-SPEED = 5
-
-[node name="Mothership" parent="." index="60" instance=ExtResource( 10 )]
-
-[node name="ScoreHeading" type="Label" parent="." index="61"]
+[node name="ScoreHeading" type="Label" parent="." index="59"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -362,7 +347,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="TotalScore" type="Label" parent="." index="62"]
+[node name="TotalScore" type="Label" parent="." index="60"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -385,106 +370,134 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "custom_fonts" ]
 
-[node name="HUD" parent="." index="63" instance=ExtResource( 12 )]
+[node name="HUD" parent="." index="61" instance=ExtResource( 10 )]
 
-[node name="InvaderMovementSound1" type="AudioStreamPlayer" parent="." index="64"]
+[node name="InvaderMovementSound1" type="AudioStreamPlayer" parent="." index="62"]
 
-stream = ExtResource( 13 )
+stream = ExtResource( 11 )
 volume_db = 0.0
 pitch_scale = 1.0
 autoplay = false
 mix_target = 0
 bus = ""
 
-[node name="InvaderMovementSound2" type="AudioStreamPlayer" parent="." index="65"]
+[node name="InvaderMovementSound2" type="AudioStreamPlayer" parent="." index="63"]
 
-stream = ExtResource( 13 )
+stream = ExtResource( 11 )
 volume_db = 0.0
 pitch_scale = 1.25
 autoplay = false
 mix_target = 0
 bus = ""
 
-[node name="InvaderMovementSound3" type="AudioStreamPlayer" parent="." index="66"]
+[node name="InvaderMovementSound3" type="AudioStreamPlayer" parent="." index="64"]
 
-stream = ExtResource( 14 )
+stream = ExtResource( 12 )
 volume_db = 0.0
 pitch_scale = 1.5
 autoplay = false
 mix_target = 0
 bus = ""
 
-[node name="InvaderMovementSound4" type="AudioStreamPlayer" parent="." index="67"]
+[node name="InvaderMovementSound4" type="AudioStreamPlayer" parent="." index="65"]
 
-stream = ExtResource( 15 )
+stream = ExtResource( 13 )
 volume_db = 0.0
 pitch_scale = 1.75
 autoplay = false
 mix_target = 0
 bus = ""
 
-[node name="InvaderSoundTimer" type="Timer" parent="." index="68"]
+[node name="InvaderSoundTimer" type="Timer" parent="." index="66"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="InvaderSoundSpeed" type="Timer" parent="." index="69"]
+[node name="InvaderSoundSpeed" type="Timer" parent="." index="67"]
 
 process_mode = 1
 wait_time = 10.0
 one_shot = false
 autostart = false
 
-[node name="PlayerLife" type="Sprite" parent="." index="70"]
+[node name="PlayerLife" type="Sprite" parent="." index="68"]
 
 position = Vector2( 35.6044, 742.781 )
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 16 )
+texture = ExtResource( 14 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="PlayerLife2" type="Sprite" parent="." index="71"]
+[node name="PlayerLife2" type="Sprite" parent="." index="69"]
 
 position = Vector2( 77.6044, 742.781 )
 scale = Vector2( 0.2, 0.2 )
-texture = ExtResource( 16 )
+texture = ExtResource( 14 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Line3InvaderStartTimer" type="Timer" parent="." index="72"]
+[node name="Line3InvaderStartTimer" type="Timer" parent="." index="70"]
 
 process_mode = 1
 wait_time = 0.3
 one_shot = true
 autostart = false
 
-[node name="Line2InvaderStartTimer" type="Timer" parent="." index="73"]
+[node name="Line2InvaderStartTimer" type="Timer" parent="." index="71"]
 
 process_mode = 1
 wait_time = 0.5
 one_shot = true
 autostart = false
 
-[node name="Line1InvaderStartTimer" type="Timer" parent="." index="74"]
+[node name="Line1InvaderStartTimer" type="Timer" parent="." index="72"]
 
 process_mode = 1
 wait_time = 0.7
 one_shot = true
 autostart = false
 
-[node name="Line0InvaderStartTimer" type="Timer" parent="." index="75"]
+[node name="Line0InvaderStartTimer" type="Timer" parent="." index="73"]
 
 process_mode = 1
 wait_time = 0.9
 one_shot = true
 autostart = false
 
-[node name="Line4InvaderStartTimer" type="Timer" parent="." index="76"]
+[node name="Line4InvaderStartTimer" type="Timer" parent="." index="74"]
 
 process_mode = 1
 wait_time = 0.1
 one_shot = true
 autostart = false
+
+[node name="Barrier1" parent="." index="75" instance=ExtResource( 15 )]
+
+position = Vector2( 153.667, 638.97 )
+
+[node name="Barrier2" parent="." index="76" instance=ExtResource( 15 )]
+
+position = Vector2( 381.667, 638.97 )
+
+[node name="Barrier3" parent="." index="77" instance=ExtResource( 15 )]
+
+position = Vector2( 631.667, 639.97 )
+
+[node name="Barrier4" parent="." index="78" instance=ExtResource( 15 )]
+
+position = Vector2( 867.667, 639.97 )
+
+[node name="Barrier5" parent="." index="79" instance=ExtResource( 15 )]
+
+position = Vector2( -548.437, 541.646 )
+scale = Vector2( 9.2552, 1 )
+_sections_unfolded = [ "Pickable", "Transform" ]
+
+[node name="InvaderLaserBolt1" parent="." index="80" instance=ExtResource( 16 )]
+
+[node name="InvaderLaserBolt2" parent="." index="81" instance=ExtResource( 17 )]
+
+position = Vector2( -405.373, 70.6698 )
 
 [connection signal="hit" from="Player" to="." method="_on_Player_hit"]
 
@@ -710,10 +723,6 @@ autostart = false
 
 [connection signal="hiding" from="LaserBolt" to="." method="_on_LaserBolt_hiding"]
 
-[connection signal="hiding" from="InvaderLaserBolt1" to="." method="_on_InvaderLaserBolt1_hiding"]
-
-[connection signal="hiding" from="InvaderLaserBolt2" to="." method="_on_InvaderLaserBolt2_hiding"]
-
 [connection signal="hit" from="Mothership" to="." method="_on_Mothership_hit"]
 
 [connection signal="start_game" from="HUD" to="." method="_new_game"]
@@ -731,5 +740,9 @@ autostart = false
 [connection signal="timeout" from="Line0InvaderStartTimer" to="." method="_on_Line0InvaderStartTimer_timeout"]
 
 [connection signal="timeout" from="Line4InvaderStartTimer" to="." method="_on_Line4InvaderStartTimer_timeout"]
+
+[connection signal="hiding" from="InvaderLaserBolt1" to="." method="_on_InvaderLaserBolt1_hiding"]
+
+[connection signal="hiding" from="InvaderLaserBolt2" to="." method="_on_InvaderLaserBolt2_hiding"]
 
 

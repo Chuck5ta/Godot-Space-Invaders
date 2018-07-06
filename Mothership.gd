@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 signal hit
 
 var Flying = false
@@ -37,18 +37,6 @@ func _on_VisibilityNotifier2D_screen_exited():
     else:
         $AppearTimer.stop()
 
-func _on_Mothership_body_entered(body):
-    print("Mothership has been hit!!")
-    $CollisionShape2D.disabled = true
-    MothershipAlive = false
-    emit_signal("hit")
-    $FlyingSound.stop();
-    $ExplosionSound.play()
-    $MothershipSprite.visible = false 
-    $ExplosionSprite.visible = true 
-    $ExplosionTimer.start() 
-    $AppearTimer.stop()
-
 func _on_ExplsionTimer_timeout():
     $ExplosionSprite.visible = false
     
@@ -70,4 +58,14 @@ func _reset_mothership_scene():
     $CollisionShape2D.disabled = false
     $AppearTimer.start()
 
-    
+func _on_Mothership_area_entered(area):
+    print("Mothership has been hit!!")
+    $CollisionShape2D.disabled = true
+    MothershipAlive = false
+    emit_signal("hit")
+    $FlyingSound.stop();
+    $ExplosionSound.play()
+    $MothershipSprite.visible = false 
+    $ExplosionSprite.visible = true 
+    $ExplosionTimer.start() 
+    $AppearTimer.stop()

@@ -35,8 +35,9 @@ func show_game_over(score):
         $MessageLabel.show()        
 
 # this occurs when the player wipes out a wave of invaders
-func show_next_wave(score):
-    show_message("Wave Destroyed", score)
+func show_next_wave(score, wave):
+    var msg =  "Wave " + str(wave) + " Destroyed"
+    show_message(msg, score)
     $StartButton.text = "NEXT WAVE"
     $StartButton.show()
 

@@ -1,4 +1,4 @@
-extends RigidBody2D
+extends Area2D
 
 signal hit
 export (int) var SPEED  # how fast the player will move (pixels/sec)
@@ -31,34 +31,36 @@ func _process(delta):
         position += velocity * delta
         position.x = clamp(position.x, 0, screensize.x)
         position.y = clamp(position.y, 0, screensize.y)
-
-func _on_Player_body_entered(body):
-    if (PlayerAlive): # used to prevent double kill (2 lives lost) at the same time
-        $CollisionShape2D.disabled = true
-        PlayerAlive = false
-        # hide animation  
-        $Sprite.visible = false 
-        $AnimatedSprite.visible = true    
-        $AnimatedSprite.play()  
-        $ExplosionSound.play()
-        $ExplosionTimer.start()
-        yield($ExplosionTimer, "timeout")
-        emit_signal("hit")
+    
+# Run at the start of a new level
+func _reset_player_scene():
+    show()  
+    $PlayerSprite.show()
+    $PlayerSprite.visible = true 
+    position.x = StartPositionX
+    position.y = StartPositionY
+    PlayerAlive = true
+    $CollisionShape2D.disabled = false
 
 func _on_ExplosionTimer_timeout():
     # Hide the scene
     hide()  
     $AnimatedSprite.stop() 
     $AnimatedSprite.visible = false
-    $Sprite.visible = true  
-    $ExplosionTimer.stop() 
-    
-# Run at the start of a new level
-func _reset_player_scene():
-    show()  
-    $Sprite.show()
-    $Sprite.visible = true 
-    position.x = StartPositionX
-    position.y = StartPositionY
-    PlayerAlive = true
-    $CollisionShape2D.disabled = false
+    $PlayerSprite.visible = true  
+    $ExplosionTimer.stop()
+
+
+func _on_Player_area_entered(area):
+    print("PLAYER GUN HIT!!!!")
+    if (PlayerAlive): # used to prevent double kill (2 lives lost) at the same time
+        $CollisionShape2D.disabled = true
+        PlayerAlive = false
+        # hide animation  
+        $PlayerSprite.visible = false 
+        $AnimatedSprite.visible = true    
+        $AnimatedSprite.play()  
+        $ExplosionSound.play()
+        $ExplosionTimer.start()
+        yield($ExplosionTimer, "timeout")
+        emit_signal("hit") 
