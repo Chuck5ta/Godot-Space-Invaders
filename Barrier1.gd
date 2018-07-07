@@ -15,15 +15,25 @@ func _ready():
 #    pass
 
 
-func _on_Barrier1_body_entered(body):
-    return
-    print("************************* SOMETHING HIT US **********************")
-    print("************************* SOMETHING HIT US **********************")
-    print("************************* SOMETHING HIT US **********************")
-    print("************************* SOMETHING HIT US **********************")
-    print("************************* SOMETHING HIT US **********************")
-    print("************************* SOMETHING HIT US **********************")
+func _test():
+    $BarrierSprite.visible = true
+    #$BarrierSprite.texture.
 
 
-func _on_Barrier1_area_entered(area):
-    pass
+func _on_Barrier1_area_entered(area):    
+    var ArrayOfOverlaps = get_overlapping_areas() 
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    for item in ArrayOfOverlaps:
+        print(item)    
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    print("************************* SOMETHING HIT US **********************")
+    
