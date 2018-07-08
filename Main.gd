@@ -1,5 +1,9 @@
 extends Node
 
+#onready var InvaderLaser = preload("res://InvaderLaserBolt.tscn")
+#onready var InvaderLaser01 = get_node(InvaderLaserBolt1)
+#onready var InvaderLaser02 = get_node(InvaderLaserBolt2)
+
 
 # Player related
 var PlayerAlive = true
@@ -328,12 +332,37 @@ func _clear_invaders():
 # Invader laser bolt
 # -------------------   
     
-func _on_InvaderLaserBolt1_hiding():
+func _on_InvaderLaserBolt1_hit(area, LaserPosition):
     TotalInvaderLaserbolts -= 1  
     if (TotalInvaderLaserbolts < 0):
         TotalInvaderLaserbolts = 0
+    # did we hit a barrier?
+    if area.get_name() == "Barrier1":
+        # pass coords to the barrier
+        $Barrier1.blast_away_pixels(LaserPosition)
+    elif area.get_name() == "Barrier2":
+        $Barrier2.blast_away_pixels(LaserPosition)
+    elif area.get_name() == "Barrier3":
+        $Barrier3.blast_away_pixels(LaserPosition)
+    elif area.get_name() == "Barrier4":
+        $Barrier4.blast_away_pixels(LaserPosition)
+    
 
-func _on_InvaderLaserBolt2_hiding():
+func _on_InvaderLaserBolt2_hit(area, LaserPosition):
+    TotalInvaderLaserbolts -= 1 
+    if (TotalInvaderLaserbolts < 0):
+        TotalInvaderLaserbolts = 0   
+    # did we hit a barrier?
+    if area.get_name() == "Barrier1":
+        $Barrier1.blast_away_pixels(LaserPosition)
+    elif area.get_name() == "Barrier2":
+        $Barrier2.blast_away_pixels(LaserPosition)
+    elif area.get_name() == "Barrier3":
+        $Barrier3.blast_away_pixels(LaserPosition)
+    elif area.get_name() == "Barrier4":
+        $Barrier4.blast_away_pixels(LaserPosition)
+
+func _on_InvaderLaserBolt_hiding():
     TotalInvaderLaserbolts -= 1 
     if (TotalInvaderLaserbolts < 0):
         TotalInvaderLaserbolts = 0   
@@ -899,3 +928,4 @@ func _on_Player_hit():
         GameOver = true
     else: # reset player
         $Player._reset_player_scene()
+

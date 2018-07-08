@@ -1,14 +1,13 @@
 extends Area2D
 
+signal hit
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var Laserbolt
 
 func _ready():
     # Called when the node is added to the scene for the first time.
     # Initialization here
-    #Laserbolt = get_tree().get_root().get_node("AutoLoad_name")
     pass
 
 #func _process(delta):
@@ -17,13 +16,6 @@ func _ready():
 #    pass
 
 
-func _test():
-    $BarrierSprite.visible = true
-    #$BarrierSprite.texture.
-
-
-func _on_Barrier1_area_entered(area): 
-    pass
-    
-func blast_away_pixels(LaserCoords):
-    $TextureRect._blast_barrier(LaserCoords, position)
+func _on_Area2D_area_entered(area):
+    print("name", area.getName())
+    area.getname()

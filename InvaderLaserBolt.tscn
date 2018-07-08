@@ -4,7 +4,7 @@
 [ext_resource path="res://Art/InvaderLaser01.png" type="Texture" id=2]
 [ext_resource path="res://Art/InvaderLaser.png" type="Texture" id=3]
 
-[sub_resource type="SpriteFrames" id=2]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
@@ -13,10 +13,10 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 6.36707, 14.5362 )
+extents = Vector2( 6.05359, 14.2459 )
 
 [node name="InvaderLaserBolt" type="Area2D" index="0"]
 
@@ -34,22 +34,23 @@ SPEED = 5
 
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="." index="0"]
 
-position = Vector2( 1.87595, 1.94394 )
-scale = Vector2( 0.607456, 1.40124 )
+position = Vector2( 1.97437, 1.94394 )
+scale = Vector2( 0.597614, 1.40124 )
 rect = Rect2( -10, -10, 20, 20 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
 scale = Vector2( 4, 4 )
-frames = SubResource( 2 )
+frames = SubResource( 1 )
 animation = "laserBolt"
-playing = true
+frame = 1
 _sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 
-position = Vector2( 1.88019, 1.94284 )
-shape = SubResource( 3 )
+position = Vector2( 1.88019, 1.7314 )
+scale = Vector2( 1, 0.987943 )
+shape = SubResource( 2 )
 
 [connection signal="area_entered" from="." to="." method="_on_InvaderLaserBolt_area_entered"]
 

@@ -487,15 +487,9 @@ position = Vector2( 631.667, 639.97 )
 
 position = Vector2( 867.667, 639.97 )
 
-[node name="Barrier5" parent="." index="79" instance=ExtResource( 15 )]
+[node name="InvaderLaserBolt1" parent="." index="79" instance=ExtResource( 16 )]
 
-position = Vector2( -548.437, 541.646 )
-scale = Vector2( 9.2552, 1 )
-_sections_unfolded = [ "Pickable", "Transform" ]
-
-[node name="InvaderLaserBolt1" parent="." index="80" instance=ExtResource( 16 )]
-
-[node name="InvaderLaserBolt2" parent="." index="81" instance=ExtResource( 17 )]
+[node name="InvaderLaserBolt2" parent="." index="80" instance=ExtResource( 17 )]
 
 position = Vector2( -405.373, 70.6698 )
 
@@ -741,8 +735,12 @@ position = Vector2( -405.373, 70.6698 )
 
 [connection signal="timeout" from="Line4InvaderStartTimer" to="." method="_on_Line4InvaderStartTimer_timeout"]
 
-[connection signal="hiding" from="InvaderLaserBolt1" to="." method="_on_InvaderLaserBolt1_hiding"]
+[connection signal="hiding" from="InvaderLaserBolt1" to="." method="_on_InvaderLaserBolt_hiding"]
 
-[connection signal="hiding" from="InvaderLaserBolt2" to="." method="_on_InvaderLaserBolt2_hiding"]
+[connection signal="hit" from="InvaderLaserBolt1" to="." method="_on_InvaderLaserBolt1_hit"]
+
+[connection signal="hiding" from="InvaderLaserBolt2" to="." method="_on_InvaderLaserBolt_hiding"]
+
+[connection signal="hit" from="InvaderLaserBolt2" to="." method="_on_InvaderLaserBolt2_hit"]
 
 

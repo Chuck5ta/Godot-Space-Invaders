@@ -1,5 +1,6 @@
 extends Area2D
 
+signal hit(area, LaserPosition)
 signal hiding
 
 export (int) var SPEED  # how fast the player will move (pixels/sec)
@@ -26,12 +27,12 @@ func _disable_laserbolt():
     LaserBoltMoving = false
     hide()
     $AnimatedSprite.stop()
-    emit_signal("hiding")
     $CollisionShape2D.disabled = true # stop it from destroying anything else
 
 func _on_VisibilityNotifier2D_screen_exited():
     # stop the laser bolt moving 
     _disable_laserbolt()
+    emit_signal("hiding")
         
 func _reset_laserbolt(): 
     print("Activate Invader!")
@@ -43,6 +44,9 @@ func _reset_laserbolt():
 
 
 func _on_InvaderLaserBolt_area_entered(area):
+ #   if area.getname() == "Barrier1":
+ #       queue_free()
+ #       var Barrier = get_tree().get_root().get_node("Barrier1")
   #  position.x = StartPositionX
   #  position.y = StartPositionY  
     print("Invader laser hit something!")
@@ -50,6 +54,7 @@ func _on_InvaderLaserBolt_area_entered(area):
     $AnimatedSprite.stop()
     $AnimatedSprite.visible = false
     hide()
+    emit_signal("hit", area, position)
     _disable_laserbolt()
     
     

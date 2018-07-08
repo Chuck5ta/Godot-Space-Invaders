@@ -20,7 +20,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = ""
 script = ExtResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Z Index" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 
