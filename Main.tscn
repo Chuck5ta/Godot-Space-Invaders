@@ -717,6 +717,8 @@ position = Vector2( -405.373, 70.6698 )
 
 [connection signal="hiding" from="LaserBolt" to="." method="_on_LaserBolt_hiding"]
 
+[connection signal="hit" from="LaserBolt" to="." method="_on_LaserBolt_hit"]
+
 [connection signal="hit" from="Mothership" to="." method="_on_Mothership_hit"]
 
 [connection signal="start_game" from="HUD" to="." method="_new_game"]

@@ -1,5 +1,5 @@
 extends Area2D
-signal hit
+signal hit(area, LaserPosition)
 signal hiding
 
 export (int) var SPEED  # how fast the player will move (pixels/sec)
@@ -36,4 +36,5 @@ func _reset_laserbolt():
 func _on_LaserBolt_area_entered(area):
     # delete the laser bolt
     print("Laser bolt has hit the target!")
+    emit_signal("hit", area, position)
     _disable_laserbolt()

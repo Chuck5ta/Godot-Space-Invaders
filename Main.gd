@@ -339,13 +339,13 @@ func _on_InvaderLaserBolt1_hit(area, LaserPosition):
     # did we hit a barrier?
     if area.get_name() == "Barrier1":
         # pass coords to the barrier
-        $Barrier1.blast_away_pixels(LaserPosition)
+        $Barrier1.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     elif area.get_name() == "Barrier2":
-        $Barrier2.blast_away_pixels(LaserPosition)
+        $Barrier2.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     elif area.get_name() == "Barrier3":
-        $Barrier3.blast_away_pixels(LaserPosition)
+        $Barrier3.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     elif area.get_name() == "Barrier4":
-        $Barrier4.blast_away_pixels(LaserPosition)
+        $Barrier4.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     
 
 func _on_InvaderLaserBolt2_hit(area, LaserPosition):
@@ -354,13 +354,25 @@ func _on_InvaderLaserBolt2_hit(area, LaserPosition):
         TotalInvaderLaserbolts = 0   
     # did we hit a barrier?
     if area.get_name() == "Barrier1":
-        $Barrier1.blast_away_pixels(LaserPosition)
+        $Barrier1.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     elif area.get_name() == "Barrier2":
-        $Barrier2.blast_away_pixels(LaserPosition)
+        $Barrier2.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     elif area.get_name() == "Barrier3":
-        $Barrier3.blast_away_pixels(LaserPosition)
+        $Barrier3.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
     elif area.get_name() == "Barrier4":
-        $Barrier4.blast_away_pixels(LaserPosition)
+        $Barrier4.blast_away_pixels(LaserPosition, "down") # coords of laser, laser direction (blastDirection)
+    
+
+func _on_LaserBolt_hit(area, LaserPosition):
+    # did we hit a barrier?
+    if area.get_name() == "Barrier1":
+        $Barrier1.blast_away_pixels(LaserPosition, "up") # coords of laser, laser direction (blastDirection)
+    elif area.get_name() == "Barrier2":
+        $Barrier2.blast_away_pixels(LaserPosition, "up") # coords of laser, laser direction (blastDirection)
+    elif area.get_name() == "Barrier3":
+        $Barrier3.blast_away_pixels(LaserPosition, "up") # coords of laser, laser direction (blastDirection)
+    elif area.get_name() == "Barrier4":
+        $Barrier4.blast_away_pixels(LaserPosition, "up") # coords of laser, laser direction (blastDirection)
 
 func _on_InvaderLaserBolt_hiding():
     TotalInvaderLaserbolts -= 1 

@@ -44,11 +44,6 @@ func _reset_laserbolt():
 
 
 func _on_InvaderLaserBolt_area_entered(area):
- #   if area.getname() == "Barrier1":
- #       queue_free()
- #       var Barrier = get_tree().get_root().get_node("Barrier1")
-  #  position.x = StartPositionX
-  #  position.y = StartPositionY  
     print("Invader laser hit something!")
     LaserBoltMoving = false
     $AnimatedSprite.stop()

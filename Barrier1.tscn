@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Barrier1.gd" type="Script" id=1]
 [ext_resource path="res://TextureRect.gd" type="Script" id=2]
 [ext_resource path="res://Art/Barrier.png" type="Texture" id=3]
-[ext_resource path="res://Art/invader03a.png" type="Texture" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -51,12 +50,6 @@ script = ExtResource( 2 )
 scale = Vector2( 5, 5 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Transform" ]
-
-[node name="Sprite" type="Sprite" parent="TextureRect" index="1"]
-
-visible = false
-texture = ExtResource( 4 )
-_sections_unfolded = [ "Animation", "Visibility" ]
 
 [connection signal="area_entered" from="." to="." method="_on_Barrier1_area_entered"]
 

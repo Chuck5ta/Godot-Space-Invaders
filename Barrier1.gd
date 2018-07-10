@@ -17,13 +17,8 @@ func _ready():
 #    pass
 
 
-func _test():
-    $BarrierSprite.visible = true
-    #$BarrierSprite.texture.
-
-
 func _on_Barrier1_area_entered(area): 
     pass
     
-func blast_away_pixels(LaserCoords):
-    $TextureRect._blast_barrier(LaserCoords, position)
+func blast_away_pixels(LaserCoords, BlastDirection):
+    $TextureRect._blast_barrier(LaserCoords, position, BlastDirection)
