@@ -6,10 +6,14 @@ extends Area2D
 var Laserbolt
 
 func _ready():
-    # Called when the node is added to the scene for the first time.
-    # Initialization here
-    #Laserbolt = get_tree().get_root().get_node("AutoLoad_name")
-    pass
+    # required from the 2nd wave onwards
+    # TODO reload image
+    
+    # re-enable collision
+    $TopLeftCollission.disabled = false
+    $BottomLeftCollission.disabled = false
+    $BottomRightCollission.disabled = false 
+    $TopRightCollission.disabled = false  
 
 #func _process(delta):
 #    # Called every frame. Delta is time since last frame.
@@ -22,3 +26,15 @@ func _on_Barrier1_area_entered(area):
     
 func blast_away_pixels(LaserCoords, BlastDirection):
     $TextureRect._blast_barrier(LaserCoords, position, BlastDirection)
+
+func _on_TextureRect_DisableTopLeftCollission():
+    $TopLeftCollission.disabled = true
+
+func _on_TextureRect_DisableBottomLeftCollission():
+    $BottomLeftCollission.disabled = true
+
+func _on_TextureRect_DisableBottomRightCollission():
+    $BottomRightCollission.disabled = true   
+    
+func _on_TextureRect_DisableTopRightCollission():
+    $TopRightCollission.disabled = true

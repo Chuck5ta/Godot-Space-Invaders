@@ -7,7 +7,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 4.9577, 5.04337 )
 
 [node name="Barrier1" type="Area2D" index="0"]
 
@@ -21,12 +21,13 @@ audio_bus_name = ""
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform", "Z Index" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+[node name="TopRightCollission" type="CollisionShape2D" parent="." index="0"]
 
-position = Vector2( -0.047302, -0.0954099 )
+position = Vector2( 27.3532, -20.5589 )
 scale = Vector2( 5.51365, 4.04402 )
+z_index = 1
 shape = SubResource( 1 )
-_sections_unfolded = [ "Material" ]
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
 
 [node name="TextureRect" type="TextureRect" parent="." index="1"]
 
@@ -51,6 +52,38 @@ scale = Vector2( 5, 5 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Material", "Transform" ]
 
+[node name="BottomLeftCollission" type="CollisionShape2D" parent="." index="2"]
+
+position = Vector2( -27.6469, 20.4411 )
+scale = Vector2( 5.51365, 4.04402 )
+z_index = 1
+shape = SubResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
+
+[node name="BottomRightCollission" type="CollisionShape2D" parent="." index="3"]
+
+position = Vector2( 27.3532, 20.4411 )
+scale = Vector2( 5.51365, 4.04402 )
+z_index = 1
+shape = SubResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
+
+[node name="TopLeftCollission" type="CollisionShape2D" parent="." index="4"]
+
+position = Vector2( -27.6468, -20.5589 )
+scale = Vector2( 5.51365, 4.04402 )
+z_index = 1
+shape = SubResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Z Index" ]
+
 [connection signal="area_entered" from="." to="." method="_on_Barrier1_area_entered"]
+
+[connection signal="DisableBottomLeftCollission" from="TextureRect" to="." method="_on_TextureRect_DisableBottomLeftCollission"]
+
+[connection signal="DisableBottomRightCollission" from="TextureRect" to="." method="_on_TextureRect_DisableBottomRightCollission"]
+
+[connection signal="DisableTopLeftCollission" from="TextureRect" to="." method="_on_TextureRect_DisableTopLeftCollission"]
+
+[connection signal="DisableTopRightCollission" from="TextureRect" to="." method="_on_TextureRect_DisableTopRightCollission"]
 
 

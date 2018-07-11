@@ -1,4 +1,8 @@
 extends TextureRect
+signal DisableTopLeftCollission
+signal DisableTopRightCollission
+signal DisableBottomLeftCollission
+signal DisableBottomRightCollission
 
 # Gonna try and use this to create destructible sprite image
 var editableImage
@@ -21,27 +25,22 @@ func _ready():
 #    # Update game logic here.
 #    pass
     
+func _disable_collision_checks(image):
+    # Top left collsion area    
+    if image.get_pixel(0, 7) == destroyedPixel && image.get_pixel(1, 7) == destroyedPixel && image.get_pixel(2, 7) == destroyedPixel && image.get_pixel(3, 7) == destroyedPixel && image.get_pixel(4, 7) == destroyedPixel && image.get_pixel(5, 7) == destroyedPixel && image.get_pixel(6, 7) == destroyedPixel && image.get_pixel(7, 7) == destroyedPixel && image.get_pixel(8, 7) == destroyedPixel && image.get_pixel(9, 7) == destroyedPixel && image.get_pixel(10, 7) == destroyedPixel:
+        emit_signal("DisableTopLeftCollission")
     
-
-func _blast_it(LaserCoords, BarrierCoords, BlastDirection):
-    var SpriteXLocation
-    var SpriteYLocation    
-    var Xdifference
-    var Ydifference
-    var LaserBoltStrikeCoordX = LaserCoords.x
-    var LaserBoltStrikeCoordY = 28 + LaserCoords.y
+    # Top right collsion area
+    if image.get_pixel(11, 7) == destroyedPixel && image.get_pixel(12, 7) == destroyedPixel && image.get_pixel(13, 7) == destroyedPixel && image.get_pixel(14, 7) == destroyedPixel && image.get_pixel(15, 7) == destroyedPixel && image.get_pixel(16, 7) == destroyedPixel && image.get_pixel(17, 7) == destroyedPixel && image.get_pixel(18, 7) == destroyedPixel && image.get_pixel(19, 7) == destroyedPixel && image.get_pixel(20, 7) == destroyedPixel && image.get_pixel(21, 7) == destroyedPixel:       
+        emit_signal("DisableTopRightCollission")
     
-    # Difference between the strike point and the Barriers origin 
-    if LaserBoltStrikeCoordX > BarrierCoords.x:
-         Xdifference = LaserBoltStrikeCoordX - BarrierCoords.x
-    else:
-         Xdifference = BarrierCoords.x - LaserBoltStrikeCoordX    
-    if LaserBoltStrikeCoordY > BarrierCoords.y:
-         Ydifference = LaserBoltStrikeCoordY - BarrierCoords.y
-    else:
-         Ydifference = BarrierCoords.y - LaserBoltStrikeCoordY
+    # Bottom left collsion area
+    if image.get_pixel(0, 15) == destroyedPixel && image.get_pixel(1, 15) == destroyedPixel && image.get_pixel(2, 15) == destroyedPixel && image.get_pixel(3, 15) == destroyedPixel && image.get_pixel(4, 15) == destroyedPixel && image.get_pixel(5, 15) == destroyedPixel && image.get_pixel(6, 15) == destroyedPixel && image.get_pixel(7, 15) == destroyedPixel && image.get_pixel(8, 15) == destroyedPixel && image.get_pixel(9, 15) == destroyedPixel && image.get_pixel(10, 15) == destroyedPixel:       
+        emit_signal("DisableBottomLeftCollission")
     
-    
+    # Bottom right collsion area
+    if image.get_pixel(11, 15) == destroyedPixel && image.get_pixel(12, 15) == destroyedPixel && image.get_pixel(13, 15) == destroyedPixel && image.get_pixel(14, 15) == destroyedPixel && image.get_pixel(15, 15) == destroyedPixel && image.get_pixel(16, 15) == destroyedPixel && image.get_pixel(17, 15) == destroyedPixel && image.get_pixel(18, 15) == destroyedPixel && image.get_pixel(19, 15) == destroyedPixel && image.get_pixel(20, 15) == destroyedPixel && image.get_pixel(21, 15) == destroyedPixel:       
+        emit_signal("DisableBottomRightCollission")
 
     
 func _blast_barrier(LaserCoords, BarrierCoords, BlastDirection):
@@ -79,7 +78,6 @@ func _blast_barrier(LaserCoords, BarrierCoords, BlastDirection):
         else:
             SpriteYLocation = (Ydifference / ActualBarrierHeight) * 16 # (truncate?)
         SpriteYLocation = 0 # TODO delete the above code to do with calculating the Y coord, as ir will always be 0
-        #_write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection)
     else:
         var LaserBoltStrikeCoordX = LaserCoords.x
         var LaserBoltStrikeCoordY = LaserCoords.y
@@ -107,7 +105,6 @@ func _blast_barrier(LaserCoords, BarrierCoords, BlastDirection):
         else:
             SpriteYLocation = 15
         SpriteYLocation = 15 # TODO delete the above code to do with calculating the Y coord, as ir will always be 15
-       # _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection)
     
     _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection)
         
@@ -134,6 +131,8 @@ func _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection):
                 # destroy a line of pixels along the X axis    
                 if randi()%11+1 < 8:                
                     image.set_pixel(round(SpriteXLocation + pixel), SpriteYLocation, Color(0.0, 0.0, 0.0, 0.0))
+                    # check if we can disable the collision2D
+                    _disable_collision_checks(image)
             SpriteYLocation += 1
             TotalRowsToDestroy -= 1
     else: # player gun shooting up the screen
@@ -153,8 +152,8 @@ func _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection):
             #pixelsToDestroy -= 1
             for pixel in pixelsToDestroy:  
                 # destroy a line of pixels along the X axis    
-                if randi()%11+1 < 8:                
-                    image.set_pixel(round(SpriteXLocation + pixel), SpriteYLocation, Color(0.0, 0.0, 0.0, 0.0))
+                #if randi()%11+1 < 8:                
+                image.set_pixel(round(SpriteXLocation + pixel), SpriteYLocation, Color(0.0, 0.0, 0.0, 0.0))
             SpriteYLocation -= 1
             TotalRowsToDestroy -= 1
         
