@@ -76,14 +76,4 @@ z_index = 1
 shape = SubResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Z Index" ]
 
-[connection signal="area_entered" from="." to="." method="_on_Barrier1_area_entered"]
-
-[connection signal="DisableBottomLeftCollission" from="TextureRect" to="." method="_on_TextureRect_DisableBottomLeftCollission"]
-
-[connection signal="DisableBottomRightCollission" from="TextureRect" to="." method="_on_TextureRect_DisableBottomRightCollission"]
-
-[connection signal="DisableTopLeftCollission" from="TextureRect" to="." method="_on_TextureRect_DisableTopLeftCollission"]
-
-[connection signal="DisableTopRightCollission" from="TextureRect" to="." method="_on_TextureRect_DisableTopRightCollission"]
-
 

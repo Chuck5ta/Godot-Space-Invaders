@@ -54,6 +54,10 @@ func _new_game():
         TotalInvaders = 55
         MothershipAlive = true
         $Mothership._reset_mothership_scene()
+        $Barrier1._reenable_barrier()
+        $Barrier2._reenable_barrier()
+        $Barrier3._reenable_barrier()
+        $Barrier4._reenable_barrier()
         $Player._reset_player_scene()
         _reset_invaders()
         $InvaderSoundTimer.wait_time = 1
@@ -77,20 +81,13 @@ func _process(delta):
                 $LaserBolt.position.y -= 22 # position it just above the gun tip
                 $LaserBolt._reset_laserbolt()
                 $LaserBoltSound.play()
-            
-  #      while (fireTest):
-  #          _invader_fire_laser($Invader44)
-  #          fireTest = false
-        # INVAD
         
         if (TotalInvaderLaserbolts == 0):
             var invaderFire = randi() % 100 # we don't want the invaders firing too often        
             if (invaderFire < 25):                
                 var NoOfLaserToFire = randi() % 2      
                 _invaders_fire_laserbolts(NoOfLaserToFire+1) # fire 1 or 2 lasers
-    else:           
-        #$InvaderSoundTimer.stop() 
-        #$InvaderSoundSpeed.stop()       
+    else:                  
         $HUD.show_game_over(TotalScore)
         # clear remaining invaders
         if (TotalInvaders > 0):

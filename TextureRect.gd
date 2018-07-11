@@ -132,7 +132,7 @@ func _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection):
                 if randi()%11+1 < 8:                
                     image.set_pixel(round(SpriteXLocation + pixel), SpriteYLocation, Color(0.0, 0.0, 0.0, 0.0))
                     # check if we can disable the collision2D
-                    _disable_collision_checks(image)
+                    #_disable_collision_checks(image)
             SpriteYLocation += 1
             TotalRowsToDestroy -= 1
     else: # player gun shooting up the screen
@@ -154,6 +154,7 @@ func _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection):
                 # destroy a line of pixels along the X axis    
                 #if randi()%11+1 < 8:                
                 image.set_pixel(round(SpriteXLocation + pixel), SpriteYLocation, Color(0.0, 0.0, 0.0, 0.0))
+                #_disable_collision_checks(image)
             SpriteYLocation -= 1
             TotalRowsToDestroy -= 1
         
@@ -161,6 +162,14 @@ func _write_pixel(SpriteXLocation, SpriteYLocation, BlastDirection):
     _write_image_back()
   
 func _write_image_back():    
+    imageTexture.create_from_image(image, 0) # 0 deatctivates filter?
+    $BarrierSprite.texture = imageTexture
+    
+func _reload_image():
+    imageTexture = ImageTexture.new()
+    image = Image.new()
+    image.create(imageSize.y,imageSize.y,imageFormat,0)
+    image.load("res://Art/Barrier.png")
     imageTexture.create_from_image(image, 0) # 0 deatctivates filter?
     $BarrierSprite.texture = imageTexture
 
