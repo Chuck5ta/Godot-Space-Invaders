@@ -40,6 +40,13 @@ func _ready():
     $InvaderSoundTimer.start() 
     $InvaderSoundSpeed.start() 
 
+func _hide_barriers():
+    $Barrier1.hide()
+    $Barrier2.hide()
+    $Barrier3.hide()
+    $Barrier4.hide()
+    
+
 func _new_game():
     if (GameOver):  # Player dead or invaders have broken through 
         $HUD.show_message("Get Ready", TotalScore)     
@@ -70,6 +77,8 @@ func _process(delta):
         $InvaderSoundTimer.stop()  
         $InvaderSoundSpeed.stop()         
     if (_wave_killed()):
+        # hide barriers
+        _hide_barriers()
         $HUD.show_next_wave(TotalScore, WaveNumber)
         return
     if (!_game_over()):
@@ -88,7 +97,8 @@ func _process(delta):
                 var NoOfLaserToFire = randi() % 2      
                 _invaders_fire_laserbolts(NoOfLaserToFire+1) # fire 1 or 2 lasers
     else:                  
-        $HUD.show_game_over(TotalScore)
+        $HUD.show_game_over(TotalScore)        
+        _hide_barriers()
         # clear remaining invaders
         if (TotalInvaders > 0):
             _clear_invaders()

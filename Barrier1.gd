@@ -22,4 +22,5 @@ func blast_away_pixels(LaserCoords, BlastDirection):
 func _reenable_barrier():    
     # required from the 2nd wave onwards
     # TODO reload image
-    $TextureRect._reload_image() 
+    $TextureRect._reload_image()
+    show() 
